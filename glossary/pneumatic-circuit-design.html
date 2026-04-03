@@ -82,49 +82,18 @@ body::before {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: #2D465F; border-radius: 3px; }
 a { color: inherit; text-decoration: none; }
-.nav {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(8,18,30,.86);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(89,227,255,.16);
-  height: 62px;
-  box-shadow: 0 12px 32px rgba(0,0,0,.26);
-}
-.nav-inner {
-  max-width: var(--max); margin: 0 auto; padding: 0 40px; height: 100%;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; color: var(--text); }
-.logo-lockup {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:36px;
-  width:206px;
-  background:transparent;
-  border:none;
-  border-radius:0;
-  overflow:hidden;
-  box-shadow:none;
-}
-.logo-lockup img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; transform:scale(1.015); }
-.logo-sq {
-  width: 30px; height: 30px; border-radius: 7px;
-  display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-  color: #032638; font-family: var(--mono); font-size: 12px; font-weight: 600;
-}
-.nav-links { display: flex; gap: 2px; }
-.nav-links a {
-  font-size: 13px; font-weight: 600; color: #9CB1C8;
-  padding: 7px 13px; border-radius: 7px; transition: all .15s; letter-spacing: .01em;
-}
-.nav-links a:hover, .nav-links a[data-active] { color: #F4FAFF; background: rgba(89,227,255,.10); }
-.nav-cta {
-  font-size: 13.5px; font-weight: 600; padding: 8px 18px; border-radius: 8px;
-  background: linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%); color: #032638; border: none; cursor: pointer; transition: all .18s;
-  box-shadow: 0 10px 28px rgba(31,190,220,.24);
-}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+.nav-left{display:flex;align-items:center;gap:28px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-lockup{display:inline-flex;align-items:center;justify-content:center;height:36px;width:206px;background:transparent;border:none;border-radius:0;overflow:hidden;box-shadow:none;}
+.logo-lockup img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.015);}
+.nav-links{display:flex;gap:2px;}
+.nav-links a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;}
+.nav-links a:hover,.nav-links a[data-active]{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .18s;text-decoration:none;border:none;}
+.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);}
+.btn-brand:hover{filter:brightness(.98);box-shadow:0 14px 30px rgba(31,190,220,.34);}
 .breadcrumb {
   max-width: var(--max); margin: 0 auto; padding: 18px 40px 0;
   display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-3);
@@ -258,26 +227,31 @@ section p { font-family: var(--serif); font-size: 16px; font-weight: 300; color:
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="../ClusterVise_Vision_Interactive_FINAL.html" class="nav-logo">
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">
       <span class="logo-lockup">
         <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
       </span>
     </a>
     <div class="nav-links">
-      <a href="../ClusterVise_Vision_Interactive_FINAL.html">Platform</a>
-      <a href="../ClusterVise_Vision_Interactive_FINAL.html#how-it-works">How It Works</a>
-      <a href="index.html" data-active>Glossary</a>
-      <a href="../ClusterVise_Vision_Interactive_FINAL.html#pricing">Pricing</a>
+      <a href="/#how-it-works">How it works</a>
+      <a href="/#features">Features</a>
+      <a href="/#results">Results</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#security">Security</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/glossary/" data-active>Glossary</a>
     </div>
-    <button class="nav-cta" onclick="location.href='../ClusterVise_Vision_Interactive_FINAL.html'">Request Demo</button>
+  </div>
+  <div class="nav-right">
+    <button onclick="location.href='/contact/'" class="btn btn-brand">Get in touch</button>
   </div>
 </nav>
 <div class="breadcrumb">
-  <a href="../ClusterVise_Vision_Interactive_FINAL.html">Home</a>
+  <a href="/">Home</a>
   <span class="sep">›</span>
-  <a href="index.html">Glossary</a>
+  <a href="/glossary/">Glossary</a>
   <span class="sep">›</span>
   <span class="current">Pneumatic Circuit Design</span>
 </div>
@@ -421,7 +395,7 @@ section p { font-family: var(--serif); font-size: 16px; font-weight: 300; color:
     <div class="cta-card">
       <h3>See this automated on your next machine</h3>
       <p>ClusterVise turns machine requirements into BOM, I/O structure, and design outputs faster than manual engineering handoff.</p>
-      <a href="../ClusterVise_Vision_Interactive_FINAL.html" class="cta-btn">Request a Pilot</a>
+      <a href="/" class="cta-btn">Request a Pilot</a>
     </div>
     <div class="sb-card">
       <div class="sb-title">Platform stats</div>
@@ -433,16 +407,16 @@ section p { font-family: var(--serif); font-size: 16px; font-weight: 300; color:
   </aside>
 </div>
 <div class="footer">
-  <a href="../ClusterVise_Vision_Interactive_FINAL.html" class="nav-logo footer-brand">
+  <a href="/" class="nav-logo footer-brand">
     <span class="logo-lockup">
       <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
     </span>
   </a>
   <div class="footer-links">
-    <a href="index.html">All Terms</a>
-    <a href="../ClusterVise_Vision_Interactive_FINAL.html">Platform</a>
-    <a href="../ClusterVise_Vision_Interactive_FINAL.html">Request Demo</a>
-    <a href="../ClusterVise_Vision_Interactive_FINAL.html">Privacy</a>
+    <a href="/glossary/">All Terms</a>
+    <a href="/">Platform</a>
+    <a href="/">Request Demo</a>
+    <a href="/">Privacy</a>
   </div>
 </div>
 <script>

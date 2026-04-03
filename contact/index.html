@@ -43,41 +43,63 @@ body::before{
 }
 a{color:inherit;text-decoration:none;}
 .shell{max-width:1120px;margin:0 auto;padding:0 40px;}
-nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;display:flex;align-items:center;box-shadow:0 12px 32px rgba(0,0,0,.26);}
-.nav-logo{display:flex;align-items:center;text-decoration:none;}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+.nav-left{display:flex;align-items:center;gap:28px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .logo-lockup{display:inline-flex;align-items:center;justify-content:center;height:36px;width:206px;background:transparent;border:none;border-radius:0;overflow:hidden;box-shadow:none;}
 .logo-lockup img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.015);}
-main{padding:58px 40px 80px;}
-.panel{
-  max-width:760px;
+.nav-links{display:flex;gap:2px;}
+.nav-links a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;}
+.nav-links a:hover{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .18s;text-decoration:none;border:none;}
+.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);}
+.btn-brand:hover{filter:brightness(.98);box-shadow:0 14px 30px rgba(31,190,220,.34);}
+main{padding:0 0 80px;}
+.hero{
+  max-width:1120px;
+  margin:0 auto;
+  padding:92px 40px 82px;
+}
+.hero-left{
+  position:relative;
   border:1px solid rgba(89,227,255,.14);
   background:linear-gradient(180deg,rgba(12,24,38,.86),rgba(7,16,27,.94));
   border-radius:26px;
-  padding:34px 34px 30px;
+  padding:42px 40px 30px;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 24px 60px rgba(0,0,0,.28);
 }
-.eyebrow{
+.hero-left::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:26px;
+  pointer-events:none;
+  background:linear-gradient(135deg,rgba(89,227,255,.05),transparent 35%,transparent 68%,rgba(143,214,94,.03) 100%);
+}
+.hero-eyebrow{
   display:inline-flex;align-items:center;gap:7px;
   font-family:'JetBrains Mono',monospace;
   font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   color:var(--brand);background:rgba(89,227,255,.08);border:1px solid rgba(89,227,255,.16);
-  padding:7px 12px;border-radius:999px;margin-bottom:20px;
+  padding:7px 12px;border-radius:999px;margin-bottom:22px;
 }
-.dot{width:6px;height:6px;border-radius:50%;background:var(--brand);}
+.blink{width:6px;height:6px;border-radius:50%;background:var(--brand);animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
 h1{
   font-family:'Inter',sans-serif;
-  font-size:clamp(40px,7vw,68px);
+  font-size:clamp(36px,3.7vw,56px);
   font-weight:800;
-  line-height:.94;
-  letter-spacing:-.055em;
-  margin-bottom:16px;
+  line-height:1.01;
+  letter-spacing:-.04em;
+  margin-bottom:20px;
   text-wrap:balance;
 }
-.lede{
-  font-size:18px;
-  line-height:1.72;
-  color:var(--text-2);
-  max-width:720px;
+.hero-desc{
+  font-size:17px;
+  line-height:1.82;
+  color:#C6D7E8;
+  max-width:540px;
   margin-bottom:30px;
 }
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
@@ -98,26 +120,42 @@ h1{
 .email a:hover{color:var(--brand);}
 .note{margin-top:18px;font-size:12px;color:var(--text-3);}
 @media (max-width:720px){
+  nav{padding:0 18px;}
+  .nav-links{display:none;}
   .shell,main{padding-left:20px;padding-right:20px;}
+  .hero{padding:52px 20px 56px;}
   .cards{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
   <nav>
-    <div class="shell">
+    <div class="nav-left">
       <a href="/" class="nav-logo">
         <span class="logo-lockup">
           <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
         </span>
       </a>
+      <div class="nav-links">
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#features">Features</a>
+        <a href="/#results">Results</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#security">Security</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/glossary/">Glossary</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button onclick="location.href='/'" class="btn btn-brand">Get in touch</button>
     </div>
   </nav>
-  <main class="shell">
-    <section class="panel">
-      <div class="eyebrow"><span class="dot"></span>Built for industrial automation teams</div>
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+      <div class="hero-eyebrow"><span class="blink"></span>Built for industrial automation teams</div>
       <h1>Contact ClusterVise.</h1>
-      <p class="lede">Direct contact details for the ClusterVise team. Reach the founders directly when you need a faster conversation.</p>
+      <p class="hero-desc">Direct contact details for the ClusterVise team. Reach the founders directly when you need a faster conversation.</p>
       <div class="cards">
         <article class="card">
           <div class="label">Contact</div>
@@ -129,6 +167,7 @@ h1{
           <div class="name">Joshua Devaraj</div>
           <div class="email"><a href="mailto:joshua.devaraj@clustervise.com">joshua.devaraj@clustervise.com</a></div>
         </article>
+      </div>
       </div>
     </section>
   </main>
