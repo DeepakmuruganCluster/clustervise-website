@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Pneumatic Circuit Design — Industrial Machine Design Glossary | ClusterVise</title>
+<meta name="description" content="Pneumatic circuit design is the engineering of air preparation, valve logic, actuator sizing, and flow control so a machine can move safely and repeatably."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://clustervise.com/glossary/pneumatic-circuit-design"/>
+<meta property="og:title" content="Pneumatic Circuit Design | ClusterVise Glossary"/>
+<meta property="og:description" content="Pneumatic circuit design is the engineering of air preparation, valve logic, actuator sizing, and flow control so a machine can move safely and repeatably."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://clustervise.com/glossary/pneumatic-circuit-design"/>
+<meta property="og:site_name" content="ClusterVise"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": "Pneumatic Circuit Design",
+  "description": "Pneumatic circuit design is the engineering of air preparation, valve logic, actuator sizing, and flow control so a machine can move safely and repeatably.",
+  "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Industrial Machine Design Glossary",
+    "url": "https://clustervise.com/glossary"
+  },
+  "url": "https://clustervise.com/glossary/pneumatic-circuit-design"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --brand: #59E3FF;
+  --brand-dk: #1FBEDC;
+  --brand-lt: rgba(89,227,255,.10);
+  --brand-border: rgba(89,227,255,.18);
+  --accent: #8FD65E;
+  --accent-lt: rgba(143,214,94,.10);
+  --warn: #F97316;
+  --warn-lt: rgba(249,115,22,.09);
+  --green: #34D399;
+  --green-lt: rgba(52,211,153,.09);
+  --bg: #06101B;
+  --bg-2: #0B1726;
+  --bg-3: #132234;
+  --text: #EAF4FF;
+  --text-2: #AABDD3;
+  --text-3: #6F87A1;
+  --border: #1D324A;
+  --border-2: #2A4563;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+  --serif: 'Inter', sans-serif;
+  --radius: 10px;
+  --max: 1120px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background:
+    radial-gradient(circle at 14% 0%, rgba(89,227,255,.16), transparent 22%),
+    radial-gradient(circle at 86% 8%, rgba(89,227,255,.08), transparent 18%),
+    linear-gradient(180deg,#08111C 0%,#06101B 44%,#08121D 100%);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(89,227,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(89,227,255,.03) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,.7), transparent 88%);
+  opacity: .33;
+}
+::selection { background: rgba(89,227,255,.22); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #2D465F; border-radius: 3px; }
+a { color: inherit; text-decoration: none; }
+.nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(8,18,30,.86);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(89,227,255,.16);
+  height: 62px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.26);
+}
+.nav-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px; height: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; color: var(--text); }
+.logo-lockup {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  width:206px;
+  background:transparent;
+  border:none;
+  border-radius:0;
+  overflow:hidden;
+  box-shadow:none;
+}
+.logo-lockup img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; transform:scale(1.015); }
+.logo-sq {
+  width: 30px; height: 30px; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+  color: #032638; font-family: var(--mono); font-size: 12px; font-weight: 600;
+}
+.nav-links { display: flex; gap: 2px; }
+.nav-links a {
+  font-size: 13px; font-weight: 600; color: #9CB1C8;
+  padding: 7px 13px; border-radius: 7px; transition: all .15s; letter-spacing: .01em;
+}
+.nav-links a:hover, .nav-links a[data-active] { color: #F4FAFF; background: rgba(89,227,255,.10); }
+.nav-cta {
+  font-size: 13.5px; font-weight: 600; padding: 8px 18px; border-radius: 8px;
+  background: linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%); color: #032638; border: none; cursor: pointer; transition: all .18s;
+  box-shadow: 0 10px 28px rgba(31,190,220,.24);
+}
+.breadcrumb {
+  max-width: var(--max); margin: 0 auto; padding: 18px 40px 0;
+  display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-3);
+}
+.breadcrumb .current { color: var(--text-2); }
+.breadcrumb a:hover { color: var(--brand); }
+.page {
+  max-width: var(--max); margin: 0 auto; padding: 32px 40px 80px;
+  display: grid; grid-template-columns: 1fr 268px; gap: 48px; align-items: start;
+}
+.term-chip {
+  display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px;
+  font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+  color: var(--accent); background: var(--accent-lt); border: 1px solid rgba(143,214,94,.2);
+  padding: 4px 12px; border-radius: 4px; letter-spacing: .04em; text-transform: uppercase;
+}
+.art-header h1 {
+  font-family: var(--sans);
+  font-size: clamp(26px, 4vw, 42px); font-weight: 800; letter-spacing: -.03em;
+  line-height: 1.08; margin-bottom: 20px;
+}
+.art-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.meta-pill {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600;
+  color: var(--text-2); background: linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015)); border: 1px solid rgba(89,227,255,.12); padding: 5px 12px; border-radius: 999px;
+}
+.lede {
+  font-family: var(--sans); font-size: 17px; font-weight: 400; line-height: 1.82;
+  color: #C6D7E8; padding: 22px 24px; border: 1px solid rgba(89,227,255,.14);
+  background: linear-gradient(180deg,rgba(12,24,38,.84),rgba(7,16,27,.94)); border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 16px 36px rgba(0,0,0,.22);
+}
+section { margin-bottom: 44px; scroll-margin-top: 80px; }
+.sec-head {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-family: var(--mono);
+  font-size: 10px; font-weight: 600; color: var(--brand); letter-spacing: .1em; text-transform: uppercase;
+}
+.sec-head::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+section p { font-family: var(--serif); font-size: 16px; font-weight: 300; color: var(--text-2); line-height: 1.82; }
+.bullet-list, .callout-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li, .callout-list li {
+  display: grid; grid-template-columns: 20px 1fr; gap: 8px;
+  font-family: var(--serif); font-size: 15.5px; font-weight: 300; color: var(--text-2); line-height: 1.75;
+}
+.bullet-list li::before { content: '→'; color: var(--brand); font-family: var(--mono); font-size: 13px; padding-top: 2px; }
+.callout {
+  border-radius: 18px; padding: 22px 22px; background: linear-gradient(180deg,rgba(249,115,22,.12),rgba(249,115,22,.06)); border: 1px solid rgba(249,115,22,.24);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+.callout-title {
+  font-family: var(--mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em;
+  margin-bottom: 14px; color: var(--warn);
+}
+.callout-list li::before { content: '⚠'; font-size: 11px; color: var(--warn); padding-top: 2px; }
+.workflow { display: flex; flex-direction: column; }
+.wf-step { display: grid; grid-template-columns: 38px 1fr; gap: 16px; }
+.wf-track { display: flex; flex-direction: column; align-items: center; }
+.wf-num {
+  width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015)); border: 1px solid rgba(89,227,255,.14);
+  display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--brand); z-index: 1;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+.wf-line { flex: 1; width: 1px; background: var(--border); min-height: 20px; margin: 4px 0; }
+.wf-step:last-child .wf-line { display: none; }
+.wf-body { padding-bottom: 24px; }
+.wf-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+.wf-detail { font-family: var(--serif); font-size: 14px; font-weight: 300; color: var(--text-3); line-height: 1.68; }
+.callout-good { background: linear-gradient(180deg,rgba(52,211,153,.10),rgba(52,211,153,.04)); border: 1px solid rgba(52,211,153,.2); border-radius: 18px; padding: 22px 22px; box-shadow: inset 0 1px 0 rgba(255,255,255,.025); }
+.callout-good .callout-title { color: var(--green); }
+.callout-good p { font-family: var(--serif); font-size: 14.5px; font-weight: 300; color: var(--text-2); line-height: 1.78; }
+.example-block { background: linear-gradient(180deg,rgba(10,21,34,.92),rgba(8,17,28,.98)); border: 1px solid rgba(89,227,255,.12); border-radius: 18px; overflow: hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,.025), 0 16px 36px rgba(0,0,0,.22); }
+.example-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ex-tag {
+  font-family: var(--mono); font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 4px;
+}
+.ex-tag-blue { background: var(--brand-lt); color: var(--brand); border: 1px solid var(--brand-border); }
+.ex-tag-green { background: var(--green-lt); color: var(--green); border: 1px solid rgba(52,211,153,.2); }
+.bom-table { width: 100%; border-collapse: collapse; }
+.bom-table th {
+  text-align: left; font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: .07em; padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--bg-3);
+}
+.bom-table td {
+  padding: 10px 16px; border-bottom: 1px solid rgba(29,50,74,.5); font-size: 13px; color: var(--text-2); font-family: var(--mono);
+}
+.bom-table tr:last-child td { border-bottom: none; }
+.td-name { color: var(--text); font-weight: 500; }
+.related-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.related-chip {
+  font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--brand);
+  background: var(--brand-lt); border: 1px solid var(--brand-border); padding: 6px 14px; border-radius: 6px;
+}
+.sidebar { position: sticky; top: 76px; display: flex; flex-direction: column; gap: 14px; }
+.sb-card, .cta-card { background: linear-gradient(180deg,rgba(10,21,34,.92),rgba(8,17,28,.98)); border: 1px solid rgba(89,227,255,.12); border-radius: 18px; padding: 18px; box-shadow: inset 0 1px 0 rgba(255,255,255,.025), 0 16px 36px rgba(0,0,0,.22); }
+.sb-title {
+  font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .09em; margin-bottom: 14px;
+}
+.toc-link {
+  display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; color: var(--text-3);
+  padding: 8px 10px; border-radius: 10px; transition: all .15s; border-left: 2px solid transparent; margin-bottom: 4px;
+}
+.toc-link:hover, .toc-link.active { color: var(--brand); background: rgba(89,227,255,.10); border-left-color: var(--brand); }
+.toc-num { font-family: var(--mono); font-size: 10px; opacity: .6; width: 16px; }
+.cta-card { background: linear-gradient(145deg, rgba(89,227,255,.07), rgba(143,214,94,.05)); border-color: rgba(89,227,255,.18); }
+.cta-card h3 { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+.cta-card p { font-family: var(--serif); font-size: 13px; font-weight: 300; color: var(--text-3); line-height: 1.65; margin-bottom: 14px; }
+.cta-btn {
+  display: block; text-align: center; font-size: 13px; font-weight: 700; padding: 9px 18px;
+  border-radius: 7px; background: var(--brand); color: #032638;
+}
+.stat-row {
+  display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-key { font-size: 11.5px; color: var(--text-3); }
+.stat-val { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--text); }
+.footer {
+  border-top: 1px solid var(--border); padding: 28px 40px; max-width: var(--max); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.footer-brand { font-size: 13px; font-weight: 700; color: var(--text-3); }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--text-3); }
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (max-width: 860px) {
+  .page { grid-template-columns: 1fr; padding: 24px 20px 60px; }
+  .sidebar { position: static; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../ClusterVise_Vision_Interactive_FINAL.html" class="nav-logo">
+      <span class="logo-lockup">
+        <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="../ClusterVise_Vision_Interactive_FINAL.html">Platform</a>
+      <a href="../ClusterVise_Vision_Interactive_FINAL.html#how-it-works">How It Works</a>
+      <a href="index.html" data-active>Glossary</a>
+      <a href="../ClusterVise_Vision_Interactive_FINAL.html#pricing">Pricing</a>
+    </div>
+    <button class="nav-cta" onclick="location.href='../ClusterVise_Vision_Interactive_FINAL.html'">Request Demo</button>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="../ClusterVise_Vision_Interactive_FINAL.html">Home</a>
+  <span class="sep">›</span>
+  <a href="index.html">Glossary</a>
+  <span class="sep">›</span>
+  <span class="current">Pneumatic Circuit Design</span>
+</div>
+<div class="page">
+  <article class="article">
+    <div class="art-header reveal" id="sec-top">
+      <div class="term-chip">Pneumatics · Air Logic</div>
+      <h1>Pneumatic Circuit Design</h1>
+      <div class="art-meta">
+        <span class="meta-pill">⚙ Pneumatics</span>
+      </div>
+      <p class="lede">A pneumatic circuit is more than a cylinder connected to a valve. In industrial machine design, the full circuit includes the pressure source, filtration and regulation, valve behaviour, flow restrictions, exhaust handling, actuator force margin, and the control logic that makes motion repeatable at the target cycle time.</p>
+    </div>
+    <section class="reveal" id="sec-usage">
+      <div class="sec-head">Where this is used in real machines</div>
+      <ul class="bullet-list">
+        <li>Pick-and-place modules that rely on compact air cylinders for clamping, lifting, and indexing.</li>
+<li>Assembly fixtures where force, stroke, and speed must remain consistent across high cycle counts.</li>
+<li>Packaging mechanisms using vacuum, blow-off, or short-stroke linear motion.</li>
+<li>Machines where pneumatics are preferred over servo motion for cost, simplicity, or robustness.</li>
+      </ul>
+    </section>
+    <section class="reveal" id="sec-tech">
+      <div class="sec-head">Technical context</div>
+      <p>Good circuit design balances force, speed, air consumption, and fail-safe behaviour. Engineers select FRL units, valve manifolds, flow controls, exhaust treatment, tubing, and sensors while considering pressure drop and simultaneous demand. The chosen topology must also reflect safety behaviour: what happens on air loss, power loss, emergency stop, or restart conditions.</p>
+    </section>
+    <section class="reveal" id="sec-mistakes">
+      <div class="sec-head">Common mistakes engineers make</div>
+      <div class="callout">
+        <div class="callout-title">Engineer Errors — What Goes Wrong</div>
+        <ul class="callout-list">
+          <li>Sizing cylinders for theoretical force only and forgetting friction, back pressure, and required safety factor.</li>
+<li>Selecting valve Cv too low for the needed stroke speed, which slows the machine unexpectedly.</li>
+<li>Ignoring simultaneous actuator demand and then underestimating manifold or air preparation sizing.</li>
+<li>Skipping clear fail-safe definition for air-loss conditions.</li>
+<li>Treating tubing and exhaust restriction as an afterthought, even though they directly affect response.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="reveal" id="sec-manual">
+      <div class="sec-head">How engineers currently solve this</div>
+      <div class="workflow">
+        <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">1</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Define each motion</div>
+        <div class="wf-detail">Confirm force, stroke, dwell, and repeatability requirement for every actuator.</div>
+      </div>
+    </div>
+<div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">2</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Select actuator and valve type</div>
+        <div class="wf-detail">Match cylinder geometry and valve function to the motion behaviour.</div>
+      </div>
+    </div>
+<div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">3</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Design air preparation</div>
+        <div class="wf-detail">Choose filtration, regulation, and shutoff for the machine or zone.</div>
+      </div>
+    </div>
+<div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">4</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Tune flow and sensing</div>
+        <div class="wf-detail">Add flow controls, sensors, and cushioning where required.</div>
+      </div>
+    </div>
+<div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">5</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Validate fail states</div>
+        <div class="wf-detail">Confirm how the system behaves during stop, venting, and restart.</div>
+      </div>
+    </div>
+      </div>
+    </section>
+    <section class="reveal" id="sec-cv">
+      <div class="sec-head">How ClusterVise improves this</div>
+      <div class="callout-good">
+        <div class="callout-title">ClusterVise — What Changes</div>
+        <p>ClusterVise links pneumatic choices to cycle time, BOM, and documentation outputs. When stroke, force, or valve logic changes, the connected parts list and supporting documents update with it. That reduces the common disconnect between air circuit sketches, actual selected hardware, and the final build package.</p>
+      </div>
+    </section>
+    <section class="reveal" id="sec-example">
+      <div class="sec-head">Real example — Carton Flap Folding Pneumatic Module</div>
+      <div class="example-block">
+        <div class="example-header">
+          <span class="ex-tag ex-tag-blue">Carton Flap Folding Pneumatic Module</span>
+          <span class="ex-tag ex-tag-green">ClusterVise Context</span>
+        </div>
+        <table class="bom-table">
+          <thead>
+            <tr><th>Item</th><th>Selection</th><th>Basis</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-name">Actuator</td><td>32 mm bore x 125 mm stroke</td><td>Force margin for flap resistance</td></tr>
+<tr><td class="td-name">Valve</td><td>5/2 solenoid valve</td><td>Double-acting cylinder control</td></tr>
+<tr><td class="td-name">Air prep</td><td>Filter-regulator with shutoff</td><td>Stable local supply</td></tr>
+<tr><td class="td-name">Speed control</td><td>Meter-out flow control</td><td>Controlled extension and return</td></tr>
+<tr><td class="td-name">Feedback</td><td>Cylinder magnetic sensors</td><td>Position confirmation to PLC</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="reveal" id="sec-related">
+      <div class="sec-head">Related terms</div>
+      <div class="related-grid">
+        <a href="solenoid-valve-selection.html" class="related-chip">Solenoid Valve Selection</a><a href="actuator-sizing.html" class="related-chip">Actuator Sizing</a><a href="machine-cycle-time.html" class="related-chip">Machine Cycle Time</a><a href="sensor-selection.html" class="related-chip">Sensor Selection</a><a href="bill-of-materials.html" class="related-chip">Bill of Materials (BOM)</a>
+      </div>
+    </section>
+  </article>
+  <aside class="sidebar">
+    <div class="sb-card">
+      <div class="sb-title">On this page</div>
+      <a href="#sec-top" class="toc-link active"><span class="toc-num">01</span>Definition</a>
+      <a href="#sec-usage" class="toc-link"><span class="toc-num">02</span>Where it's used</a>
+      <a href="#sec-tech" class="toc-link"><span class="toc-num">03</span>Technical context</a>
+      <a href="#sec-mistakes" class="toc-link"><span class="toc-num">04</span>Common mistakes</a>
+      <a href="#sec-manual" class="toc-link"><span class="toc-num">05</span>Manual workflow</a>
+      <a href="#sec-cv" class="toc-link"><span class="toc-num">06</span>ClusterVise approach</a>
+      <a href="#sec-related" class="toc-link"><span class="toc-num">07</span>Related terms</a>
+    </div>
+    <div class="cta-card">
+      <h3>See this automated on your next machine</h3>
+      <p>ClusterVise turns machine requirements into BOM, I/O structure, and design outputs faster than manual engineering handoff.</p>
+      <a href="../ClusterVise_Vision_Interactive_FINAL.html" class="cta-btn">Request a Pilot</a>
+    </div>
+    <div class="sb-card">
+      <div class="sb-title">Platform stats</div>
+      <div class="stat-row"><span class="stat-key">Design cycle</span><span class="stat-val">↓ 65%</span></div>
+      <div class="stat-row"><span class="stat-key">Component catalog</span><span class="stat-val">20,000+</span></div>
+      <div class="stat-row"><span class="stat-key">Export formats</span><span class="stat-val">XLS · PDF · CSV</span></div>
+      <div class="stat-row"><span class="stat-key">Pilot timeline</span><span class="stat-val">3–4 weeks</span></div>
+    </div>
+  </aside>
+</div>
+<div class="footer">
+  <a href="../ClusterVise_Vision_Interactive_FINAL.html" class="nav-logo footer-brand">
+    <span class="logo-lockup">
+      <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
+    </span>
+  </a>
+  <div class="footer-links">
+    <a href="index.html">All Terms</a>
+    <a href="../ClusterVise_Vision_Interactive_FINAL.html">Platform</a>
+    <a href="../ClusterVise_Vision_Interactive_FINAL.html">Request Demo</a>
+    <a href="../ClusterVise_Vision_Interactive_FINAL.html">Privacy</a>
+  </div>
+</div>
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 60);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => ro.observe(el));
+const sections = document.querySelectorAll('section[id], div[id^="sec-"]');
+const tocLinks = document.querySelectorAll('.toc-link');
+const tocObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      tocLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => tocObs.observe(s));
+</script>
+</body>
+</html>
