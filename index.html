@@ -429,7 +429,7 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
       <a href="#pricing">Pricing</a>
       <a href="#security">Security</a>
       <a href="#faq">FAQ</a>
-      <a href="glossary/index.html">Glossary</a>
+      <a href="/glossary/">Glossary</a>
     </div>
   </div>
   <div class="nav-right">
@@ -1074,7 +1074,7 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
       <a href="#pricing">Pricing</a>
       <a href="#security">Security</a>
       <a href="#faq">FAQ</a>
-      <a href="glossary/index.html">Glossary</a>
+      <a href="/glossary/">Glossary</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
@@ -1101,23 +1101,27 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
       <div class="modal-title">Talk to the ClusterVise team</div>
       <p class="modal-sub">Tell us about your project and we'll get back to you within 24 hours.</p>
       <form id="contact-form" onsubmit="submitContactForm(event)" novalidate>
+        <input type="hidden" name="_subject" value="ClusterVise website enquiry"/>
+        <input type="hidden" name="_template" value="table"/>
+        <input type="hidden" name="_captcha" value="false"/>
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none"/>
         <div class="mf-row">
           <div class="mf-group">
             <label for="cf-name">Full name *</label>
-            <input type="text" id="cf-name" placeholder="Your name" required/>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" required/>
           </div>
           <div class="mf-group">
             <label for="cf-company">Company *</label>
-            <input type="text" id="cf-company" placeholder="Company name" required/>
+            <input type="text" id="cf-company" name="company" placeholder="Company name" required/>
           </div>
         </div>
         <div class="mf-group">
           <label for="cf-email">Work email *</label>
-          <input type="email" id="cf-email" placeholder="you@company.com" required/>
+          <input type="email" id="cf-email" name="email" placeholder="you@company.com" required/>
         </div>
         <div class="mf-group">
           <label for="cf-plan">Plan of interest</label>
-          <select id="cf-plan">
+          <select id="cf-plan" name="plan">
             <option value="General enquiry">General enquiry</option>
             <option value="Starter — €400/month">Starter — €400/month</option>
             <option value="Professional — €900/month">Professional — €900/month</option>
@@ -1126,12 +1130,12 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
         </div>
         <div class="mf-group">
           <label for="cf-message">Tell us about your project</label>
-          <textarea id="cf-message" placeholder="Describe the machines you build, your team size, or any questions you have…"></textarea>
+          <textarea id="cf-message" name="message" placeholder="Describe the machines you build, your team size, or any questions you have…"></textarea>
         </div>
-        <button type="submit" class="modal-submit">Send enquiry →</button>
+        <button type="submit" id="contact-submit" class="modal-submit">Send enquiry →</button>
         <p class="modal-footer-note">Your message goes directly to <strong>info@clustervise.com</strong></p>
         <p class="modal-footer-note" style="margin-top:8px;">
-          If your mail app does not open, write to
+          If the form ever has trouble, write to
           <a href="mailto:info@clustervise.com" style="color:var(--brand);">info@clustervise.com</a>.
         </p>
       </form>
@@ -1295,26 +1299,49 @@ function closeModal(){
 }
 function submitContactForm(e){
   e.preventDefault();
+  const form=e.target;
+  const submitButton=document.getElementById('contact-submit');
   const name=document.getElementById('cf-name').value.trim();
   const company=document.getElementById('cf-company').value.trim();
   const email=document.getElementById('cf-email').value.trim();
   const plan=document.getElementById('cf-plan').value;
   const msg=document.getElementById('cf-message').value.trim();
   if(!name||!company||!email){return;}
-  const subject=encodeURIComponent('ClusterVise Enquiry — '+plan+' — '+company);
-  const body=encodeURIComponent('Name: '+name+'\nCompany: '+company+'\nReply-to: '+email+'\nPlan of interest: '+plan+'\n\nMessage:\n'+(msg||'(no message provided)'));
-  const to='info@clustervise.com';
-  const mailtoHref='mailto:'+to+'?subject='+subject+'&body='+body;
-  const tempLink=document.createElement('a');
-  tempLink.href=mailtoHref;
-  tempLink.style.display='none';
-  document.body.appendChild(tempLink);
-  tempLink.click();
-  tempLink.remove();
-  // show success
-  document.getElementById('success-email').textContent=email;
-  document.getElementById('modal-form-content').style.display='none';
-  document.getElementById('modal-success').style.display='block';
+  submitButton.disabled=true;
+  submitButton.textContent='Sending...';
+  const payload={
+    name,
+    company,
+    email,
+    plan,
+    message:msg||'(no message provided)',
+    _subject:'ClusterVise Enquiry — '+plan+' — '+company,
+    _replyto:email,
+    _template:'table',
+    _captcha:'false'
+  };
+  fetch('https://formsubmit.co/ajax/info@clustervise.com',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'Accept':'application/json'
+    },
+    body:JSON.stringify(payload)
+  }).then(async response=>{
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok||data.success==='false'){
+      throw new Error(data.message||'Submission failed');
+    }
+    document.getElementById('success-email').textContent=email;
+    document.getElementById('modal-form-content').style.display='none';
+    document.getElementById('modal-success').style.display='block';
+    form.reset();
+  }).catch(()=>{
+    window.location.href='mailto:info@clustervise.com?subject='+encodeURIComponent('ClusterVise Enquiry — '+plan+' — '+company)+'&body='+encodeURIComponent('Name: '+name+'\nCompany: '+company+'\nReply-to: '+email+'\nPlan of interest: '+plan+'\n\nMessage:\n'+(msg||'(no message provided)'));
+  }).finally(()=>{
+    submitButton.disabled=false;
+    submitButton.textContent='Send enquiry →';
+  });
 }
 // close on Escape key
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
