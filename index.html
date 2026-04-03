@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ClusterVise — Engineering Intelligence for Special Purpose Machines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --brand:#59E3FF;
+  --brand-dk:#1FBEDC;
+  --brand-lt:rgba(89,227,255,.12);
+  --accent:#8FD65E;
+  --accent-dk:#6FB640;
+  --accent-lt:rgba(143,214,94,.1);
+  --navy:#07111F;
+  --navy-2:#10243B;
+  --orange:#F97316;
+  --green:#34D399;
+  --red:#DC2626;
+  --bg:#06101B;
+  --bg-2:#0B1726;
+  --bg-3:#132234;
+  --text:#EAF4FF;
+  --text-2:#AABDD3;
+  --text-3:#6F87A1;
+  --border:#1D324A;
+  --border-2:#2A4563;
+  --glass:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.018));
+  --glass-strong:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.024));
+  --surface-ring:inset 0 1px 0 rgba(255,255,255,.05);
+  --shadow:0 1px 3px rgba(0,0,0,.28);
+  --shadow-md:0 18px 44px rgba(0,0,0,.30);
+  --shadow-lg:0 32px 84px rgba(0,0,0,.46);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:
+    radial-gradient(circle at 14% 0%, rgba(89,227,255,.16), transparent 22%),
+    radial-gradient(circle at 86% 8%, rgba(89,227,255,.08), transparent 18%),
+    linear-gradient(180deg,#08111C 0%,#06101B 44%,#08121D 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(89,227,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(89,227,255,.03) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,.7), transparent 88%);
+  opacity:.33;
+}
+::selection{background:rgba(89,227,255,.22);}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:#2D465F;border-radius:3px;}
+
+/* === NAV === */
+nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+.nav-left{display:flex;align-items:center;gap:28px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-lockup{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  width:206px;
+  background:transparent;
+  border:none;
+  border-radius:0;
+  overflow:hidden;
+  box-shadow:none;
+}
+.logo-lockup img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.015);}
+.nav-wordmark{font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--text);}
+.nav-links{display:flex;gap:2px;}
+.nav-links a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;}
+.nav-links a:hover{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .18s;text-decoration:none;border:none;}
+.btn-ghost{background:rgba(255,255,255,.02);color:#D7E5F3;border:1px solid rgba(89,227,255,.18);}
+.btn-ghost:hover{background:rgba(89,227,255,.10);color:#fff;border-color:rgba(89,227,255,.34);}
+.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);}
+.btn-brand:hover{filter:brightness(.98);box-shadow:0 14px 30px rgba(31,190,220,.34);}
+
+/* === FADE === */
+.fade{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+.fade.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+
+/* === HERO === */
+.hero{max-width:1120px;margin:0 auto;padding:92px 40px 82px;display:grid;grid-template-columns:1.08fr .92fr;gap:26px;align-items:stretch;}
+.hero-left,.hero-right{position:relative;border:1px solid rgba(89,227,255,.14);background:linear-gradient(180deg,rgba(12,24,38,.86),rgba(7,16,27,.94));border-radius:26px;box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 24px 60px rgba(0,0,0,.28);}
+.hero-left{padding:42px 40px;}
+.hero-right{padding:18px;}
+.hero-left::before,.hero-right::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:26px;
+  pointer-events:none;
+  background:linear-gradient(135deg,rgba(89,227,255,.05),transparent 35%,transparent 68%,rgba(143,214,94,.03) 100%);
+}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--brand);background:rgba(89,227,255,.08);border:1px solid rgba(89,227,255,.16);padding:7px 12px;border-radius:999px;margin-bottom:22px;letter-spacing:.10em;text-transform:uppercase;box-shadow:none;font-family:'JetBrains Mono',monospace;}
+.blink{width:6px;height:6px;border-radius:50%;background:var(--brand);animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+h1{font-size:clamp(36px,3.7vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1.01;color:var(--text);margin-bottom:20px;text-wrap:balance;}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--brand) 0%, #87E9B6 45%, var(--accent) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero-rotator{display:inline-block;transition:opacity .25s ease,transform .25s ease;}
+.hero-rotator.out{opacity:0;transform:translateY(8px);}
+.text-rotator{display:inline-block;transition:opacity .25s ease,transform .25s ease;}
+.text-rotator.out{opacity:0;transform:translateY(6px);}
+.hero-desc{font-size:17px;color:#C6D7E8;line-height:1.82;margin-bottom:30px;max-width:540px;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.hero-note{font-size:12px;color:var(--text-3);margin-top:14px;}
+.hero-right{display:flex;flex-direction:column;gap:13px;}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.stat-card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid rgba(89,227,255,.12);border-radius:20px;padding:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 16px 36px rgba(0,0,0,.24);backdrop-filter:blur(10px);}
+.stat-val{font-size:34px;font-weight:800;color:var(--brand);letter-spacing:-.025em;margin-bottom:3px;}
+.stat-lbl{font-size:12.5px;color:var(--text-2);}
+.stat-sub{font-size:11px;color:var(--text-3);margin-top:3px;}
+.hero-band{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid rgba(89,227,255,.12);border-radius:20px;padding:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 16px 36px rgba(0,0,0,.22);backdrop-filter:blur(10px);}
+.hero-band-title{font-size:11.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:13px;}
+.bar-row{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;}
+.bar-row:last-child{margin-bottom:0;}
+.bar-label{font-size:12px;font-weight:500;color:var(--text-2);display:flex;justify-content:space-between;}
+.bar-track{height:7px;background:var(--bg-3);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;transition:width 1.3s cubic-bezier(.16,1,.3,1);}
+.bar-before{background:var(--border-2);}
+.bar-after{background:var(--brand);}
+
+/* === PHOTO SHOWCASE === */
+.showcase{padding:76px 40px;max-width:1120px;margin:0 auto;}
+.showcase-header{text-align:center;margin-bottom:44px;}
+.section-label{font-size:11px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.16em;margin-bottom:14px;font-family:'JetBrains Mono',monospace;}
+h2.sec-h{font-size:clamp(28px,3vw,38px);font-weight:800;letter-spacing:-.03em;color:var(--text);margin-bottom:14px;line-height:1.12;text-wrap:balance;}
+.sec-sub{font-size:16px;color:#B7C8D9;line-height:1.82;max-width:660px;margin:0 auto;}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;height:300px;}
+.photo-card{border-radius:20px;overflow:hidden;position:relative;background:var(--navy);border:1px solid rgba(89,227,255,.12);box-shadow:0 18px 40px rgba(0,0,0,.24);}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 7s ease-in-out;transform:scale(1.04);}
+.photo-card:hover img{transform:scale(1.1);}
+.photo-overlay{position:absolute;inset:0;background:linear-gradient(155deg,rgba(10,22,40,.06) 0%,rgba(10,22,40,.65) 100%);}
+.photo-tag{position:absolute;top:16px;left:16px;background:rgba(15,111,255,.92);color:#fff;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;}
+.photo-caption{position:absolute;bottom:0;left:0;right:0;padding:20px;}
+.photo-caption h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.photo-caption p{font-size:12.5px;color:rgba(255,255,255,.72);}
+
+/* === SECTION === */
+.section{padding:84px 40px;max-width:1120px;margin:0 auto;}
+
+/* === SECTION DIVIDERS === */
+div[style*="border-bottom:1px solid var(--border)"],
+div[style*="border-top:1px solid var(--border);border-bottom:1px solid var(--border)"]{
+  position:relative;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    inset 0 -1px 0 rgba(255,255,255,.03);
+}
+div[style*="border-bottom:1px solid var(--border)"]::after,
+div[style*="border-top:1px solid var(--border);border-bottom:1px solid var(--border)"]::after{
+  content:'';
+  position:absolute;
+  left:40px;
+  right:40px;
+  bottom:-1px;
+  height:1px;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(89,227,255,.10) 8%,
+    rgba(89,227,255,.42) 24%,
+    rgba(143,214,94,.22) 50%,
+    rgba(89,227,255,.42) 76%,
+    rgba(89,227,255,.10) 92%,
+    transparent 100%);
+  pointer-events:none;
+}
+div[style*="border-bottom:1px solid var(--border)"]::before,
+div[style*="border-top:1px solid var(--border);border-bottom:1px solid var(--border)"]::before{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:72px;
+  background:linear-gradient(180deg,transparent 0%,rgba(89,227,255,.03) 100%);
+  pointer-events:none;
+}
+
+/* === HOW IT WORKS === */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:52px;}
+.steps-grid::before{content:'';position:absolute;top:27px;left:calc(12.5% + 12px);right:calc(12.5% + 12px);height:2px;background:linear-gradient(90deg,var(--brand),rgba(89,227,255,.2));z-index:0;}
+.hw-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px;}
+.hw-num{width:54px;height:54px;border-radius:50%;background:var(--brand);color:#032638;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:22px;position:relative;z-index:1;box-shadow:0 0 0 5px var(--bg),0 0 0 7px rgba(89,227,255,.18);}
+.hw-photo{width:100%;border-radius:12px;overflow:hidden;margin-bottom:16px;border:1px solid var(--border);aspect-ratio:4/3;}
+.hw-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease-in-out;transform:scale(1.05);}
+.hw-photo:hover img{transform:scale(1.12);}
+.hw-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.hw-desc{font-size:12.5px;color:var(--text-2);line-height:1.65;}
+
+/* === DEMO === */
+.demo-wrap{display:grid;grid-template-columns:1fr 400px;gap:52px;align-items:start;padding:80px 40px;max-width:1120px;margin:0 auto;}
+.demo-copy h2{font-size:clamp(24px,2.8vw,34px);font-weight:800;letter-spacing:-.022em;color:var(--text);margin-bottom:12px;line-height:1.2;}
+.demo-copy p{font-size:15.5px;color:var(--text-2);line-height:1.7;margin-bottom:28px;}
+.ds-list{display:flex;flex-direction:column;}
+.ds{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all .15s;}
+.ds:first-child{border-top:1px solid var(--border);}
+.ds:hover .ds-title{color:var(--brand);}
+.ds.on .ds-title{color:var(--brand);}
+.ds-num{width:24px;height:24px;border-radius:50%;background:var(--bg-3);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-3);flex-shrink:0;margin-top:2px;transition:all .2s;}
+.ds.on .ds-num{background:var(--brand);border-color:var(--brand);color:#fff;}
+.ds-title{font-size:14px;font-weight:600;color:var(--text-2);transition:color .15s;}
+.ds-body{font-size:13px;color:var(--text-3);line-height:1.6;max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.ds.on .ds-body{max-height:100px;}
+.term-wrap{position:sticky;top:80px;background:linear-gradient(180deg,rgba(10,21,35,.98),rgba(7,16,27,.98));border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.40);border:1px solid rgba(89,227,255,.14);}
+.term-bar{padding:13px 18px;background:#0F1E36;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.06);}
+.dots{display:flex;gap:5px;}
+.dots span{width:10px;height:10px;border-radius:50%;}
+.dots span:nth-child(1){background:#FF5F57;}
+.dots span:nth-child(2){background:#FEBC2E;}
+.dots span:nth-child(3){background:#28C840;}
+.term-lbl{flex:1;text-align:center;font-size:11px;color:rgba(255,255,255,.28);font-family:'JetBrains Mono',monospace;margin-left:-46px;}
+.term-body{padding:18px;min-height:320px;display:flex;flex-direction:column;gap:11px;}
+.tmsg{display:flex;gap:9px;align-items:flex-start;}
+.tmsg.u{flex-direction:row-reverse;}
+.tav{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+.tav.e{background:rgba(249,115,22,.2);color:#F97316;border:1px solid rgba(249,115,22,.3);}
+.tav.a{background:rgba(89,227,255,.18);color:var(--brand);border:1px solid rgba(89,227,255,.28);}
+.tbubble{max-width:265px;padding:10px 14px;border-radius:10px;font-size:12.5px;line-height:1.6;color:#E8EFF8;}
+.tmsg.u .tbubble{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.18);border-radius:10px 3px 10px 10px;}
+.tmsg.a .tbubble{background:rgba(89,227,255,.08);border:1px solid rgba(89,227,255,.18);border-radius:3px 10px 10px 10px;}
+.tproc{font-size:11px;color:var(--accent);padding:6px 12px;background:rgba(182,227,94,.1);border-radius:6px;display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;}
+.tproc::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);animation:blink 1s step-end infinite;flex-shrink:0;}
+@keyframes blink{50%{opacity:0;}}
+.tres{background:rgba(5,150,105,.07);border:1px solid rgba(5,150,105,.22);border-radius:9px;padding:13px;}
+.tres-hdr{font-weight:700;color:#34D399;margin-bottom:9px;font-size:12.5px;}
+.tres-row{display:flex;justify-content:space-between;padding:5px 0;border-top:1px solid rgba(5,150,105,.1);color:rgba(255,255,255,.45);font-size:12px;}
+.tres-val{color:#fff;font-weight:600;}
+.term-replay{display:block;width:calc(100% - 36px);margin:0 18px 16px;padding:9px;background:rgba(89,227,255,.08);border:1px solid rgba(89,227,255,.2);border-radius:7px;color:var(--brand);font-size:12px;font-family:inherit;cursor:pointer;transition:all .2s;letter-spacing:.03em;}
+.term-replay:hover{background:rgba(89,227,255,.14);}
+
+/* === FEATURES === */
+.features-2col{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.feat-rotator-line{font-size:13px;color:var(--text-3);margin:-10px 0 24px;font-weight:600;letter-spacing:.01em;}
+.feat-rotator-line .text-rotator{color:var(--brand);}
+.results-rotator-line{font-size:13px;color:var(--text-3);margin:-14px 0 28px;text-align:center;font-weight:600;letter-spacing:.01em;}
+.results-rotator-line .text-rotator{color:var(--brand);}
+.feat{background:linear-gradient(180deg,rgba(10,21,34,.90),rgba(8,17,28,.96));border:1px solid rgba(89,227,255,.12);border-radius:18px;padding:28px;transition:all .25s;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 14px 32px rgba(0,0,0,.22);}
+.feat:hover{border-color:rgba(89,227,255,.38);box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 20px 44px rgba(0,0,0,.30);transform:translateY(-4px);}
+.feat.active{border-color:var(--brand);box-shadow:0 0 0 3px rgba(89,227,255,.08),var(--shadow-md);}
+.feat-head{display:flex;align-items:flex-start;gap:14px;}
+.feat-icon{width:40px;height:40px;border-radius:10px;background:var(--brand-lt);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.feat-text h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.feat-text p{font-size:13px;color:var(--text-2);line-height:1.65;}
+.feat-expand{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.feat.active .feat-expand{max-height:220px;border-top:1px solid var(--border);margin-top:16px;padding-top:14px;}
+.feat-expand ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.feat-expand li{font-size:12.5px;color:var(--text-2);display:flex;align-items:flex-start;gap:8px;line-height:1.55;}
+.feat-expand li::before{content:'✓';color:var(--green);font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+
+/* === RESULTS === */
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;}
+.res-card{background:linear-gradient(180deg,rgba(10,21,34,.88),rgba(8,17,28,.96));border:1px solid rgba(89,227,255,.12);border-radius:18px;padding:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 14px 32px rgba(0,0,0,.22);}
+.res-num{font-size:36px;font-weight:800;color:var(--brand);letter-spacing:-.025em;margin-bottom:5px;}
+.res-lbl{font-size:13px;color:var(--text-2);}
+.res-sub{font-size:11.5px;color:var(--accent);font-weight:600;margin-top:3px;}
+.ba{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(89,227,255,.12);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(10,21,34,.88),rgba(8,17,28,.96));box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 18px 40px rgba(0,0,0,.24);}
+.ba-col{padding:28px;}
+.ba-col:first-child{border-right:1px solid var(--border);}
+.ba-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.ba-col:first-child .ba-head{color:var(--text-3);}
+.ba-col:last-child .ba-head{color:var(--accent);}
+.ba-item{display:flex;align-items:flex-start;gap:9px;padding:10px 0;border-top:1px solid var(--border);font-size:13.5px;color:var(--text-2);line-height:1.55;}
+.ba-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;background:var(--text-3);}
+.ba-col:last-child .ba-dot{background:var(--accent);}
+
+/* === COMPARISON === */
+.comp-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid rgba(89,227,255,.12);border-radius:18px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 14px 32px rgba(0,0,0,.22);}
+.comp-table th{background:var(--bg-3);padding:12px 18px;text-align:left;font-size:11.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);}
+.comp-table td{padding:14px 18px;font-size:13.5px;color:var(--text-2);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;}
+.comp-table tr:last-child td{border-bottom:none;}
+.comp-table tr:hover td{background:var(--bg-2);}
+.comp-table tr.us td{background:rgba(89,227,255,.06);}
+.comp-table tr.us td:first-child{color:var(--brand);font-weight:700;}
+.comp-table td:first-child{font-weight:600;color:var(--text);}
+.pill{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;letter-spacing:.04em;margin-left:4px;}
+.pill-new{background:rgba(89,227,255,.1);color:var(--brand);}
+.pill-old{background:var(--bg-3);color:var(--text-3);}
+
+/* === PRICING === */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.pc{background:linear-gradient(180deg,rgba(10,21,34,.92),rgba(8,17,28,.98));border:1px solid rgba(89,227,255,.12);border-radius:22px;padding:32px;display:flex;flex-direction:column;position:relative;transition:box-shadow .25s,transform .25s,border-color .25s;box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 18px 40px rgba(0,0,0,.24);}
+.pc:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 24px 50px rgba(0,0,0,.32);transform:translateY(-4px);border-color:rgba(89,227,255,.24);}
+.pc.pop{border-color:rgba(89,227,255,.75);box-shadow:0 0 0 1px rgba(89,227,255,.45),inset 0 1px 0 rgba(255,255,255,.03),0 24px 54px rgba(0,0,0,.34);}
+.pop-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--brand),var(--accent));color:#032638;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap;letter-spacing:.04em;}
+.pc-tier{font-size:11.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.pc-price{font-size:44px;font-weight:800;color:var(--text);letter-spacing:-.03em;line-height:1;margin-bottom:3px;}
+.pc-price sup{font-size:20px;font-weight:500;vertical-align:top;margin-top:9px;display:inline-block;color:var(--text-2);}
+.pc-period{font-size:12.5px;color:var(--text-3);margin-bottom:14px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.pc-desc{font-size:13.5px;color:var(--text-2);line-height:1.65;margin-bottom:20px;}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;}
+.pc-list li{font-size:13px;color:var(--text-2);display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.ck-on{color:var(--green);font-weight:700;flex-shrink:0;}
+.ck-off{color:var(--text-3);font-size:15px;flex-shrink:0;line-height:1.3;}
+.pc-list li.dim span{color:var(--text-3);}
+.pc-btn{margin-top:24px;padding:12px 0;border-radius:10px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;width:100%;text-align:center;}
+.btn-outline{background:transparent;border:1.5px solid var(--border-2);color:var(--text);}
+.btn-outline:hover{border-color:var(--brand);color:var(--brand);background:rgba(89,227,255,.08);}
+.btn-solid{background:var(--brand);border:none;color:#032638;}
+.btn-solid:hover{background:var(--brand-dk);}
+.pricing-note{text-align:center;margin-top:22px;font-size:13px;color:var(--text-3);}
+
+/* === CTA BAND === */
+.cta-band{background:
+  linear-gradient(180deg,rgba(8,17,28,.94),rgba(7,16,27,.98)),
+  radial-gradient(circle at top center, rgba(143,214,94,.08), transparent 24%),
+  radial-gradient(circle at 20% 30%, rgba(89,227,255,.08), transparent 24%);
+padding:84px 40px;text-align:center;border-top:1px solid rgba(89,227,255,.12);border-bottom:1px solid rgba(89,227,255,.12);position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(89,227,255,.05) 50%,transparent 100%);transform:skewY(-4deg) scale(1.25);pointer-events:none;}
+.cta-band h2{font-size:clamp(30px,3vw,44px);font-weight:800;color:#fff;margin-bottom:14px;letter-spacing:-.035em;line-height:1.08;position:relative;}
+.cta-band p{font-size:16px;color:#A8BDCF;margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.76;position:relative;}
+.cta-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+
+/* === FOOTER === */
+footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));border-top:1px solid rgba(89,227,255,.12);padding:52px 40px 32px;}
+.footer-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.4fr auto auto auto;gap:52px;align-items:start;}
+.footer-brand p{font-size:13px;color:var(--text-3);margin-top:10px;line-height:1.65;max-width:260px;}
+.footer-address{margin-top:14px;font-size:12px;color:var(--text-3);line-height:1.7;border-top:1px solid var(--border);padding-top:14px;}
+.footer-address strong{color:var(--text-2);font-weight:600;}
+.footer-col h4{font-size:11.5px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+.footer-col a{display:block;font-size:13.5px;color:var(--text-2);text-decoration:none;margin-bottom:9px;transition:color .15s;}
+.footer-col a:hover{color:var(--brand);}
+.footer-bottom{max-width:1120px;margin:28px auto 0;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3);flex-wrap:wrap;gap:8px;}
+
+/* === FAQ === */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;margin-top:44px;}
+.faq-item{border-bottom:1px solid var(--border);padding:0;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;cursor:pointer;font-size:14.5px;font-weight:600;color:var(--text);line-height:1.5;transition:color .15s;list-style:none;user-select:none;}
+.faq-q:hover{color:var(--brand);}
+.faq-q .faq-icon{width:22px;height:22px;border-radius:50%;background:var(--bg-3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text-3);flex-shrink:0;transition:all .2s;font-weight:400;}
+.faq-item.open .faq-q{color:var(--brand);}
+.faq-item.open .faq-q .faq-icon{background:var(--brand-lt);border-color:var(--brand);color:var(--brand);transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s ease;}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:18px;}
+.faq-a p{font-size:13.5px;color:var(--text-2);line-height:1.75;}
+.faq-a a{color:var(--brand);text-decoration:none;}
+.faq-a a:hover{text-decoration:underline;}
+
+/* === SECURITY TRUST === */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;}
+.trust-card{background:linear-gradient(180deg,rgba(10,21,34,.90),rgba(8,17,28,.96));border:1px solid rgba(89,227,255,.12);border-radius:18px;padding:22px 20px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 14px 32px rgba(0,0,0,.22);}
+.trust-icon{font-size:26px;margin-bottom:10px;}
+.trust-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.trust-desc{font-size:12px;color:var(--text-2);line-height:1.6;}
+
+/* === CONTACT MODAL === */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(10,22,40,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#0C1828;border:1px solid var(--border);border-radius:22px;padding:40px;width:100%;max-width:500px;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.45);animation:modal-in .25s cubic-bezier(.16,1,.3,1);}
+@keyframes modal-in{from{opacity:0;transform:translateY(18px) scale(.97);}to{opacity:1;transform:none;}}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--bg-3);border:none;cursor:pointer;font-size:18px;line-height:1;color:var(--text-3);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.modal-close:hover{background:var(--border-2);color:var(--text);}
+.modal-plan-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--accent);background:var(--accent-lt);padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.04em;}
+.modal-title{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.022em;margin-bottom:5px;}
+.modal-sub{font-size:13.5px;color:var(--text-2);line-height:1.65;margin-bottom:26px;}
+.mf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mf-group{margin-bottom:14px;}
+.mf-group label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px;}
+.mf-group input,.mf-group select,.mf-group textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);transition:border-color .15s;outline:none;-webkit-appearance:none;}
+.mf-group input:focus,.mf-group select:focus,.mf-group textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(89,227,255,.08);}
+.mf-group textarea{min-height:88px;resize:vertical;line-height:1.6;}
+.mf-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+.modal-submit{width:100%;padding:13px;background:linear-gradient(90deg,var(--brand),var(--accent));border:none;border-radius:10px;color:#032638;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:filter .18s;margin-top:4px;letter-spacing:-.01em;}
+.modal-submit:hover{filter:brightness(.95);}
+.modal-footer-note{font-size:11.5px;color:var(--text-3);text-align:center;margin-top:11px;}
+.modal-success{display:none;text-align:center;padding:12px 0 8px;}
+.modal-success .s-icon{font-size:48px;margin-bottom:16px;}
+.modal-success h3{font-size:21px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:8px;}
+.modal-success p{font-size:14px;color:var(--text-2);line-height:1.7;max-width:340px;margin:0 auto;}
+
+/* === RESPONSIVE === */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;padding:52px 20px;}
+  .hero-right{display:none;}
+  .demo-wrap{grid-template-columns:1fr;padding:52px 20px;}
+  .term-wrap{position:static;}
+  .features-2col{grid-template-columns:1fr;}
+  .results-grid{grid-template-columns:repeat(2,1fr);}
+  .ba{grid-template-columns:1fr;}
+  .ba-col:first-child{border-right:none;border-bottom:1px solid var(--border);}
+  .pricing-grid{grid-template-columns:1fr;}
+  .steps-grid{grid-template-columns:repeat(2,1fr);}
+  .steps-grid::before{display:none;}
+  .footer-inner{grid-template-columns:1fr;gap:28px;}
+  nav{padding:0 18px;}
+  .nav-links{display:none;}
+  .photo-grid{grid-template-columns:1fr;height:auto;}
+  .photo-card{height:200px;}
+  .faq-grid{grid-template-columns:1fr;}
+  .trust-grid{grid-template-columns:1fr 1fr;}
+  .showcase,.section{padding:56px 20px;}
+  div[style*="border-bottom:1px solid var(--border)"]::after,
+  div[style*="border-top:1px solid var(--border);border-bottom:1px solid var(--border)"]::after{
+    left:20px;
+    right:20px;
+  }
+}
+</style>
+</head>
+<body id="top">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="#top" class="nav-logo">
+      <span class="logo-lockup">
+        <img src="assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#results">Results</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#security">Security</a>
+      <a href="#faq">FAQ</a>
+      <a href="glossary/index.html">Glossary</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button onclick="openModal('General enquiry')" class="btn btn-brand">Get in touch</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div style="border-bottom:1px solid var(--border);">
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="blink"></span>Built for industrial automation teams</div>
+    <h1>Reduce industrial automation design <em class="hero-rotator" id="hero-rotator" data-words="time,effort,complexity">time</em>.</h1>
+    <p class="hero-desc">ClusterVise helps industrial automation teams move faster from machine requirements to design-ready outputs. By handling selection logic, project structuring, and supporting documentation with less manual work, it reduces repetitive engineering effort while improving speed and precision.</p>
+    <div class="hero-actions">
+      <button onclick="openModal('General enquiry')" class="btn btn-brand" style="padding:11px 24px;font-size:14px;">Get in touch →</button>
+      <a href="#how-it-works" class="btn btn-ghost" style="padding:11px 24px;font-size:14px;">See how it works</a>
+    </div>
+    <p class="hero-note">Reach us at info@clustervise.com · We reply within 24 hours</p>
+  </div>
+  <div class="hero-right">
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-val" data-count="10" data-suffix="×">0×</div>
+        <div class="stat-lbl">Faster design output</div>
+        <div class="stat-sub">Less engineering drag per project</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" data-count="98" data-suffix="%">0%</div>
+        <div class="stat-lbl">Less time on routine selection</div>
+        <div class="stat-sub">Engineers focus on what matters</div>
+      </div>
+    </div>
+    <div class="hero-band">
+      <div class="hero-band-title">Time per device selection task</div>
+      <div class="bar-row">
+        <div class="bar-label"><span>Manual process</span><span style="color:#94A3B8;">17 hours</span></div>
+        <div class="bar-track"><div class="bar-fill bar-before" style="width:0%" data-w="100%"></div></div>
+      </div>
+      <div class="bar-row" style="margin-bottom:0;">
+        <div class="bar-label"><span style="color:var(--brand);font-weight:600;">With ClusterVise</span><span style="color:var(--brand);font-weight:600;">8 minutes</span></div>
+        <div class="bar-track"><div class="bar-fill bar-after" style="width:0%" data-w="1.2%"></div></div>
+      </div>
+    </div>
+    <div class="hero-band" style="background:var(--bg-3);">
+      <div class="hero-band-title">Engineering hours freed per project</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+        <div>
+          <div style="font-size:11.5px;color:var(--text-3);margin-bottom:2px;">Spent on routine selection</div>
+          <div style="font-size:26px;font-weight:800;color:var(--text);text-decoration:line-through;opacity:.4;">~17 hrs</div>
+        </div>
+        <div style="font-size:20px;color:var(--text-3);">→</div>
+        <div style="text-align:right;">
+          <div style="font-size:11.5px;color:var(--brand);margin-bottom:2px;font-weight:600;">Freed for real engineering</div>
+          <div style="font-size:34px;font-weight:800;color:var(--brand);">~17 hrs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PHOTO SHOWCASE -->
+<div style="border-bottom:1px solid var(--border);">
+<div class="showcase">
+  <div class="showcase-header">
+    <div class="section-label fade">What we're built for</div>
+    <h2 class="sec-h fade">Special purpose machines.<br/>Every workflow. Every market.</h2>
+    <p class="sec-sub fade">ClusterVise is purpose-built for special purpose machine design — from custom robotic systems to high-complexity process machinery. If it's bespoke, it's our domain.</p>
+  </div>
+  <div class="photo-grid">
+    <div class="photo-card fade d1">
+      <img src="https://images.pexels.com/photos/32845661/pexels-photo-32845661.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Industrial engineer operating CNC machinery in a factory" loading="lazy"/>
+      <div class="photo-overlay"></div>
+      <div class="photo-tag">Special Purpose</div>
+      <div class="photo-caption">
+        <h3>Special Purpose Machines</h3>
+        <p>Stationwise BOM and I/O lists — generated automatically</p>
+      </div>
+    </div>
+    <div class="photo-card fade d2">
+      <img src="https://images.pexels.com/photos/8439004/pexels-photo-8439004.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Close-up of a robotic device used in automated assembly" loading="lazy"/>
+      <div class="photo-overlay"></div>
+      <div class="photo-tag">Robotics</div>
+      <div class="photo-caption">
+        <h3>Robotic Assembly Systems</h3>
+        <p>Full BOM and design package in under 10 minutes</p>
+      </div>
+    </div>
+    <div class="photo-card fade d3">
+      <img src="https://images.pexels.com/photos/5953729/pexels-photo-5953729.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Industrial process equipment inside a modern factory" loading="lazy"/>
+      <div class="photo-overlay"></div>
+      <div class="photo-tag">Process</div>
+      <div class="photo-caption">
+        <h3>Custom Process Equipment</h3>
+        <p>Device selection across 20,000+ catalogue components</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="border-bottom:1px solid var(--border);">
+<div class="section" id="how-it-works">
+  <div class="section-label fade">How it works</div>
+  <h2 class="sec-h fade">From requirement to design-ready package in four steps.</h2>
+  <p class="sec-sub fade" style="max-width:100%;margin-bottom:0;">Your engineers describe the special purpose machine. ClusterVise handles device selection, project logic, and documentation automatically.</p>
+  <div class="steps-grid">
+    <div class="hw-step fade d1">
+      <div class="hw-num">1</div>
+      <div class="hw-photo">
+        <img src="https://images.pexels.com/photos/32845690/pexels-photo-32845690.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Industrial engineers collaborating around a tablet" loading="lazy"/>
+      </div>
+      <div class="hw-title">Describe the machine</div>
+      <div class="hw-desc">Engineers describe the special purpose machine in plain language — type, power, environment, budget, and operating context.</div>
+    </div>
+    <div class="hw-step fade d2">
+      <div class="hw-num">2</div>
+      <div class="hw-photo">
+        <img src="https://images.pexels.com/photos/15764116/pexels-photo-15764116.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Engineer reviewing technical designs on dual monitors" loading="lazy"/>
+      </div>
+      <div class="hw-title">AI selects & designers review</div>
+      <div class="hw-desc">ClusterVise searches 20,000+ components and proposes the optimal configuration. Designers can review, adjust, or manually select any device before proceeding.</div>
+    </div>
+    <div class="hw-step fade d3">
+      <div class="hw-num">3</div>
+      <div class="hw-photo">
+        <img src="https://images.pexels.com/photos/33706868/pexels-photo-33706868.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Modern control room with electrical panels" loading="lazy"/>
+      </div>
+      <div class="hw-title">Builds the design logic</div>
+      <div class="hw-desc">Every design is structured automatically before your engineers see the result — no manual cross-referencing or repetitive setup needed.</div>
+    </div>
+    <div class="hw-step fade d4">
+      <div class="hw-num">4</div>
+      <div class="hw-photo">
+        <img src="https://images.pexels.com/photos/3862367/pexels-photo-3862367.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Engineer reviewing a design package on a laptop" loading="lazy"/>
+      </div>
+      <div class="hw-title">Design package complete</div>
+      <div class="hw-desc">A complete BOM, stationwise I/O lists, and project documentation — ready for engineering sign-off.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- LIVE DEMO -->
+<div style="background:var(--bg-2);border-bottom:1px solid var(--border);">
+<div class="demo-wrap">
+  <div class="demo-copy">
+    <div class="section-label fade">Live demo</div>
+    <h2 class="fade">You describe it. ClusterVise builds the BOM.</h2>
+    <p class="fade">No forms. No database searching. No cross-referencing manuals. Your engineer types a requirement in plain language — the platform does the rest.</p>
+    <div class="ds-list">
+      <div class="ds on fade" onclick="dStep(this)">
+        <div class="ds-num">1</div>
+        <div>
+          <div class="ds-title">Engineer describes the machine</div>
+          <div class="ds-body">Plain-language input — machine type, specs, environment, budget. No special syntax needed.</div>
+        </div>
+      </div>
+      <div class="ds fade" onclick="dStep(this)">
+        <div class="ds-num">2</div>
+        <div>
+          <div class="ds-title">ClusterVise processes the brief</div>
+          <div class="ds-body">AI reads the requirement, searches the catalogue, and resolves conflicts before showing a result.</div>
+        </div>
+      </div>
+      <div class="ds fade" onclick="dStep(this)">
+        <div class="ds-num">3</div>
+        <div>
+          <div class="ds-title">Full design package delivered</div>
+          <div class="ds-body">Validated BOM, stationwise I/O lists, and a complete design documentation set in under a minute.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fade d2">
+    <div class="term-wrap">
+      <div class="term-bar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="term-lbl">ClusterVise · Engineering Session</div>
+      </div>
+      <div class="term-body" id="chat"></div>
+      <button class="term-replay" onclick="startChat()">↻ Replay demo</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FEATURES -->
+<div style="border-bottom:1px solid var(--border);">
+<div class="section" id="features">
+  <div class="section-label fade">Features</div>
+  <h2 class="sec-h fade">Tools that give engineers back their time.</h2>
+  <p class="sec-sub fade" style="max-width:100%;margin-bottom:36px;">Click any feature to see what's underneath. ClusterVise automates the repetitive parts — but your engineers and designers stay in control at every step. They can review every AI selection, override any recommendation, and manually pick components whenever they choose to.</p>
+  <div class="feat-rotator-line fade">From <span class="text-rotator" id="feature-rotator" data-words="device selection,inventory check,stationwise I/O lists,single line diagrams,RFQ extraction">device selection</span> to design-ready outputs.</div>
+  <div class="features-2col">
+    <div class="feat fade" onclick="tFeat(this)">
+      <div class="feat-head">
+        <div class="feat-icon">🔮</div>
+        <div class="feat-text">
+          <h3>Predicts what you need</h3>
+          <p>Describe the special purpose machine type and ClusterVise fills in the gaps — suggesting devices and configurations before you've finished specifying.</p>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Infers missing specs from high-level descriptions</li>
+          <li>Catches constraint issues before they appear downstream</li>
+          <li>Offers multiple design options ranked by cost and lead time</li>
+          <li>Generates a complete BOM even from partial input</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat fade d1" onclick="tFeat(this)">
+      <div class="feat-head">
+        <div class="feat-icon">⚙️</div>
+        <div class="feat-text">
+          <h3>Picks the right device every time</h3>
+          <p>Not just any device that meets the spec — the optimal device, evaluated across cost, availability, lead time, and fit simultaneously.</p>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Searches 20,000+ components across multiple suppliers</li>
+          <li>Matches device choices to project requirements automatically</li>
+          <li>Suggests alternatives when devices are out of stock</li>
+          <li>Optimises for total project cost, not just unit price</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat fade d2" onclick="tFeat(this)">
+      <div class="feat-head">
+        <div class="feat-icon">📋</div>
+        <div class="feat-text">
+          <h3>Stationwise BOM & I/O management</h3>
+          <p>Generates structured stationwise BOMs and I/O lists automatically — documentation that used to take engineers hours per project.</p>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Stationwise BOM with full project structure</li>
+          <li>Stationwise I/O lists generated automatically</li>
+          <li>Cabinet size estimated automatically from the design</li>
+          <li>Man-power estimation included per project</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat fade d3" onclick="tFeat(this)">
+      <div class="feat-head">
+        <div class="feat-icon">✅</div>
+        <div class="feat-text">
+          <h3>Design logic built in from the start</h3>
+          <p>Every design is structured before your engineer sees it, with key reports and supporting outputs generated alongside.</p>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Single line diagram and key reports generated automatically</li>
+          <li>Supporting project documents created alongside the BOM</li>
+          <li>Single Line Diagram and SCCR report</li>
+          <li>Only genuine edge cases escalate to human review</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat fade d4" onclick="tFeat(this)">
+      <div class="feat-head">
+        <div class="feat-icon">📡</div>
+        <div class="feat-text">
+          <h3>Live stock and supplier data</h3>
+          <p>Pricing, availability, and lead times are live. No more building a BOM from last month's catalogue and discovering a device is discontinued at design review.</p>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Live pricing across supported brands</li>
+          <li>Stock check and prioritisation included</li>
+          <li>Lead time estimates with confidence levels</li>
+          <li>Budget validation against project targets</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat fade" onclick="tFeat(this)">
+      <div class="feat-head">
+        <div class="feat-icon">🧬</div>
+        <div class="feat-text">
+          <h3>Learns with every project. Designers select too.</h3>
+          <p>ClusterVise builds a living memory of your enterprise — learning preferred brands, component families, and configurations from every design your team runs. And designers always have full control to browse and select components themselves.</p>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Learns your company's preferred brands, suppliers, and component families automatically</li>
+          <li>Every project enriches the model — no manual curation needed</li>
+          <li>Designers can browse the full 20,000+ catalogue and manually select any component at any stage</li>
+          <li>AI suggestions sit alongside manual browsing — engineers use whichever fits the moment</li>
+          <li>Flags when a new design diverges from past patterns and explains why</li>
+          <li>Project history becomes a searchable, reusable design library for the whole team</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- AI + DESIGNER CALLOUT -->
+<div style="background:var(--bg-2);border-bottom:1px solid var(--border);">
+  <div style="max-width:1120px;margin:0 auto;padding:56px 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+    <div class="fade">
+      <div style="display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:var(--brand);background:rgba(15,111,255,.08);padding:5px 14px;border-radius:20px;margin-bottom:18px;letter-spacing:.04em;">AI-POWERED · ENGINEER-CONTROLLED</div>
+      <h2 style="font-size:clamp(22px,2.5vw,32px);font-weight:800;color:var(--text);letter-spacing:-.022em;line-height:1.2;margin-bottom:14px;">The AI learns. Your designers choose.</h2>
+      <p style="font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:24px;">With every project your team runs, ClusterVise builds a deeper understanding of your enterprise — your preferred brands, component families, and design patterns. And designers are never locked out: they can browse the full 20,000+ component catalogue and manually select any part at any step, with AI suggestions right alongside.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div style="width:28px;height:28px;border-radius:8px;background:rgba(89,227,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">🧬</div>
+          <div><div style="font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:2px;">Learns from every project, automatically</div><div style="font-size:12.5px;color:var(--text-3);line-height:1.6;">Preferred suppliers, trusted component families, and past design decisions all feed the model — with nothing to manually curate.</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div style="width:28px;height:28px;border-radius:8px;background:rgba(182,227,94,.16);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">🎯</div>
+          <div><div style="font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:2px;">Designers select, override, and refine</div><div style="font-size:12.5px;color:var(--text-3);line-height:1.6;">Designers can browse the full catalogue, filter by spec, and manually pick any component. Every override trains the model for next time.</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div style="width:28px;height:28px;border-radius:8px;background:rgba(89,227,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">📚</div>
+          <div><div style="font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:2px;">Your project history becomes an asset</div><div style="font-size:12.5px;color:var(--text-3);line-height:1.6;">Past designs are searchable and reusable. Your team's institutional knowledge is captured and accessible — not lost when someone leaves.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fade d2" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.018));border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:var(--shadow);">
+        <div style="font-size:11px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Enterprise learning</div>
+        <div style="font-size:28px;font-weight:800;color:rgba(234,244,255,.58);letter-spacing:-.02em;margin-bottom:4px;">Day 1</div>
+        <div style="font-size:12.5px;color:var(--text-3);">General catalogue knowledge</div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+          <div style="font-size:28px;font-weight:800;color:var(--brand);letter-spacing:-.02em;margin-bottom:4px;">Month 3</div>
+          <div style="font-size:12.5px;color:var(--text-2);">Knows your preferred suppliers, brands &amp; patterns</div>
+        </div>
+      </div>
+      <div style="background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.018));border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:var(--shadow);">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Designer control</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;">
+          <div style="font-size:12px;color:var(--text-2);display:flex;align-items:center;gap:7px;"><span style="color:var(--brand);font-weight:700;font-size:14px;">✓</span>Browse full catalogue</div>
+          <div style="font-size:12px;color:var(--text-2);display:flex;align-items:center;gap:7px;"><span style="color:var(--brand);font-weight:700;font-size:14px;">✓</span>Filter by spec &amp; brand</div>
+          <div style="font-size:12px;color:var(--text-2);display:flex;align-items:center;gap:7px;"><span style="color:var(--brand);font-weight:700;font-size:14px;">✓</span>Override AI selection</div>
+          <div style="font-size:12px;color:var(--text-2);display:flex;align-items:center;gap:7px;"><span style="color:var(--brand);font-weight:700;font-size:14px;">✓</span>Manual component pick</div>
+          <div style="font-size:12px;color:var(--text-2);display:flex;align-items:center;gap:7px;"><span style="color:var(--brand);font-weight:700;font-size:14px;">✓</span>AI learns from choice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div style="background:var(--bg-2);border-bottom:1px solid var(--border);">
+<div class="section" id="results">
+  <div class="section-label fade">Results</div>
+  <h2 class="sec-h fade">What engineering teams actually gain.</h2>
+  <p class="sec-sub fade" style="max-width:100%;margin-bottom:40px;">This isn't about replacing engineers. It's about giving every engineer on your team the capacity of three — by removing the work that doesn't need their judgment.</p>
+  <div class="results-rotator-line fade">Less <span class="text-rotator" id="results-rotator" data-words="time,effort,rework,friction">time</span>. More engineering focus.</div>
+  <div class="results-grid">
+    <div class="res-card fade d1">
+      <div class="res-num" data-count="10" data-suffix="×">0×</div>
+      <div class="res-lbl">Faster design output</div>
+      <div class="res-sub">Less engineering drag per project</div>
+    </div>
+    <div class="res-card fade d2">
+      <div class="res-num" data-count="98" data-suffix="%">0%</div>
+      <div class="res-lbl">Less time on routine selection</div>
+      <div class="res-sub">8 min vs. 17 hours per task</div>
+    </div>
+    <div class="res-card fade d3">
+      <div class="res-num" data-count="20000" data-suffix="+">0+</div>
+      <div class="res-lbl">Components in database</div>
+      <div class="res-sub">Updated in real time</div>
+    </div>
+    <div class="res-card fade d4">
+      <div class="res-num" data-text="&lt; 10 min">—</div>
+      <div class="res-lbl">Full BOM generation time</div>
+      <div class="res-sub">Including project logic</div>
+    </div>
+  </div>
+  <div class="ba fade">
+    <div class="ba-col">
+      <div class="ba-head">How engineers spend their time today</div>
+      <div class="ba-item"><div class="ba-dot"></div><div>8–17 hours per project searching for the right device</div></div>
+      <div class="ba-item"><div class="ba-dot"></div><div>Days of back-and-forth to complete supporting project documentation</div></div>
+      <div class="ba-item"><div class="ba-dot"></div><div>Re-doing work when a device turns out to be discontinued</div></div>
+      <div class="ba-item"><div class="ba-dot"></div><div>Building the same documentation project after project, manually</div></div>
+    </div>
+    <div class="ba-col">
+      <div class="ba-head">How engineers spend their time with ClusterVise</div>
+      <div class="ba-item"><div class="ba-dot"></div><div>8 minutes to review an AI-generated, design-ready BOM</div></div>
+      <div class="ba-item"><div class="ba-dot"></div><div>Supporting project documents arrive with the BOM — no waiting, no chasing</div></div>
+      <div class="ba-item"><div class="ba-dot"></div><div>Live stock data means substitutions happen automatically</div></div>
+      <div class="ba-item"><div class="ba-dot"></div><div>All documentation generated alongside every BOM, automatically</div></div>
+    </div>
+  </div>
+  <p style="font-size:11.5px;color:var(--text-3);margin-top:20px;line-height:1.7;">* Time figures are based on analysis of manual component selection workflows for industrial control panel projects in the 15-200 kW range (industry-observed range: 8-17 hrs/project) compared with ClusterVise AI-assisted BOM generation (under 10 minutes for equivalent scope). The 10× figure is used as a conservative headline indicator for faster output, while the 98% reduction reflects the time-per-task comparison expressed as percentage of time recovered. Component database count reflects actively catalogued, purchasable devices across supported supplier integrations.</p>
+</div>
+</div>
+
+<!-- COMPARISON -->
+<div style="border-bottom:1px solid var(--border);">
+<div class="section">
+  <div class="section-label fade">How we compare</div>
+  <h2 class="sec-h fade">ClusterVise fills the gap existing tools leave open.</h2>
+  <p class="sec-sub fade" style="max-width:100%;margin-bottom:36px;">ERP, CAD, and PLM tools help manage and record what engineers have already decided. ClusterVise is where the actual engineering decisions get made — especially for special purpose machines where every project is unique.</p>
+  <div class="fade">
+  <table class="comp-table">
+    <thead>
+      <tr><th>Tool</th><th>What it does</th><th>When it's used</th><th>With ClusterVise</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ERP <span class="pill pill-old">Finance</span></td>
+        <td>Tracks budgets, orders, and resources after the machine has been designed.</td>
+        <td>After design is complete</td>
+        <td>ClusterVise generates the design that ERP then manages — complementary tools.</td>
+      </tr>
+      <tr>
+        <td>CAD <span class="pill pill-old">Drawing</span></td>
+        <td>Creates 3D models and schematics of components a human has already chosen.</td>
+        <td>After parts are selected</td>
+        <td>ClusterVise selects the parts. CAD draws what has already been decided.</td>
+      </tr>
+      <tr>
+        <td>PLM <span class="pill pill-old">Storage</span></td>
+        <td>Stores and tracks design documents and changes that already exist.</td>
+        <td>After design is built</td>
+        <td>ClusterVise creates the designs. PLM stores and tracks them.</td>
+      </tr>
+      <tr>
+        <td>Manual process <span class="pill pill-old">Current</span></td>
+        <td>Engineers searching catalogues, comparing options, and building BOMs by hand.</td>
+        <td>Takes 8–17 hrs per project</td>
+        <td>ClusterVise does this work — freeing engineers for decisions only they can make.</td>
+      </tr>
+      <tr class="us">
+        <td>ClusterVise <span class="pill pill-new">New</span></td>
+        <td>Takes a machine description and delivers a complete, validated BOM with all documentation.</td>
+        <td>At the start — before everything else</td>
+        <td>This is a new category. No existing tool handles this step.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+
+<!-- PRICING -->
+<div style="background:var(--bg-2);border-bottom:1px solid var(--border);">
+<div class="section" id="pricing">
+  <div class="section-label fade">Pricing</div>
+  <h2 class="sec-h fade">Simple, predictable pricing.</h2>
+  <p class="sec-sub fade" style="margin-bottom:44px;">All plans include live supplier data, structured outputs, and a 14-day free trial. No credit card required to start.</p>
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <div class="pc fade d1">
+      <div class="pc-tier">Starter</div>
+      <div class="pc-price"><sup>€</sup>400</div>
+      <div class="pc-period">per month, billed annually</div>
+      <div class="pc-desc">For teams starting with the two core modules they use most often in early-stage machine design.</div>
+      <ul class="pc-list">
+        <li><span class="ck-on">✓</span><span>Device selection module</span></li>
+        <li><span class="ck-on">✓</span><span>Inventory check module</span></li>
+        <li><span class="ck-on">✓</span><span>1 user licence included</span></li>
+        <li><span class="ck-on">✓</span><span>2 supported brands</span></li>
+        <li><span class="ck-on">✓</span><span>Ready-to-use device catalogue</span></li>
+        <li><span class="ck-on">✓</span><span>Pick the right device for each project</span></li>
+        <li><span class="ck-on">✓</span><span>Check and prioritise store stock</span></li>
+        <li><span class="ck-on">✓</span><span>Stationwise BOM and project structure support</span></li>
+        <li class="dim"><span class="ck-off">–</span><span>Advanced automation tools</span></li>
+        <li class="dim"><span class="ck-off">–</span><span>AI co-pilot environment</span></li>
+      </ul>
+      <button class="pc-btn btn-outline" onclick="openModal('Starter')">Request access</button>
+    </div>
+
+    <!-- PROFESSIONAL -->
+    <div class="pc pop fade d2">
+      <div class="pop-badge">Most popular</div>
+      <div class="pc-tier">Professional</div>
+      <div class="pc-price"><sup>€</sup>900</div>
+      <div class="pc-period">per month, billed annually</div>
+      <div class="pc-desc">For teams that want the full platform workflow, from device choice through structured engineering outputs.</div>
+      <ul class="pc-list">
+        <li><span class="ck-on">✓</span><span>Everything in Starter</span></li>
+        <li><span class="ck-on">✓</span><span>Single line diagram and SCCR report</span></li>
+        <li><span class="ck-on">✓</span><span>Stationwise I/O list generation</span></li>
+        <li><span class="ck-on">✓</span><span>Automatic cabinet size estimation</span></li>
+        <li><span class="ck-on">✓</span><span>Budget validation</span></li>
+        <li><span class="ck-on">✓</span><span>DC fuse grouping automation</span></li>
+        <li><span class="ck-on">✓</span><span>Manpower estimation</span></li>
+        <li><span class="ck-on">✓</span><span>Cable management diagram support</span></li>
+        <li><span class="ck-on">✓</span><span>DAP document automation</span></li>
+        <li><span class="ck-on">✓</span><span>Critical data extraction from RFQ documents</span></li>
+      </ul>
+      <button class="pc-btn btn-solid" onclick="openModal('Professional')">Request access</button>
+    </div>
+
+    <!-- ENTERPRISE -->
+    <div class="pc fade d3">
+      <div class="pc-tier">Your Engineering Co-Pilot</div>
+      <div class="pc-price"><sup>€</sup>1,500</div>
+      <div class="pc-period">per month, billed annually</div>
+      <div class="pc-desc">For teams that want ClusterVise to support complex engineering decisions across the full machine design workflow.</div>
+      <ul class="pc-list">
+        <li><span class="ck-on">✓</span><span>Everything in Professional</span></li>
+        <li><span class="ck-on">✓</span><span>AI co-pilot for engineering decisions</span></li>
+        <li><span class="ck-on">✓</span><span>Cross-context reasoning across customer, machine, standards, and engineering inputs</span></li>
+        <li><span class="ck-on">✓</span><span>Deeper workflow rollout and custom setup</span></li>
+        <li><span class="ck-on">✓</span><span>Full REST API access</span></li>
+        <li><span class="ck-on">✓</span><span>CAD and enterprise system integration</span></li>
+        <li><span class="ck-on">✓</span><span>Unlimited seats and multi-site usage</span></li>
+        <li><span class="ck-on">✓</span><span>Dedicated customer success support</span></li>
+      </ul>
+      <button class="pc-btn btn-outline" onclick="openModal('Enterprise')">Contact us</button>
+    </div>
+
+  </div>
+  <p class="pricing-note fade">All enquiries answered within 24 hours · info@clustervise.com</p>
+</div>
+</div>
+
+<!-- SECURITY & DATA TRUST -->
+<div style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+<div class="section" id="security">
+  <div class="section-label fade">Security &amp; data</div>
+  <h2 class="sec-h fade">Your design data stays yours.</h2>
+  <p class="sec-sub fade" style="max-width:100%;margin-bottom:0;">Engineering BOMs and design files are commercially sensitive. ClusterVise is built from the ground up with data isolation, EU residency, and clear data handling practices so you can use the platform confidently at every stage of a project.</p>
+  <div class="trust-grid">
+    <div class="trust-card fade d1">
+      <div class="trust-icon">🇪🇺</div>
+      <div class="trust-title">EU data residency</div>
+      <div class="trust-desc">All data is stored and processed within the European Union. ClusterVise BV is incorporated and operated in Belgium.</div>
+    </div>
+    <div class="trust-card fade d2">
+      <div class="trust-icon">🔐</div>
+      <div class="trust-title">Privacy-first design</div>
+      <div class="trust-desc">The platform is designed around clear EU data handling expectations. Data processing agreements are available for Enterprise customers.</div>
+    </div>
+    <div class="trust-card fade d3">
+      <div class="trust-icon">🏢</div>
+      <div class="trust-title">Per-organisation isolation</div>
+      <div class="trust-desc">Your project data, BOMs, and component selections are strictly isolated. No data is shared between organisations or customers.</div>
+    </div>
+    <div class="trust-card fade d4">
+      <div class="trust-icon">🚫</div>
+      <div class="trust-title">Not used for shared training</div>
+      <div class="trust-desc">Your designs never feed a shared model. AI learning is scoped entirely to your own organisation's history — no exceptions.</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--text-3);margin-top:22px;text-align:center;" class="fade">Enterprise customers can request custom data residency options and dedicated infrastructure. <button onclick="openModal('Enterprise')" style="color:var(--brand);text-decoration:none;background:none;border:none;padding:0;font:inherit;cursor:pointer;">Talk to us →</button></p>
+</div>
+</div>
+
+<!-- FAQ -->
+<div style="border-bottom:1px solid var(--border);">
+<div class="section" id="faq">
+  <div class="section-label fade">FAQ</div>
+  <h2 class="sec-h fade">Common questions.</h2>
+  <p class="sec-sub fade" style="max-width:100%;margin-bottom:0;">If something isn't answered here, send us a message at <a href="mailto:info@clustervise.com" style="color:var(--brand);text-decoration:none;">info@clustervise.com</a> and we'll get back to you within 24 hours.</p>
+  <div class="faq-grid">
+
+    <div class="faq-item fade" onclick="tFaq(this)">
+      <div class="faq-q">What does ClusterVise generate for each project?<span class="faq-icon">+</span></div>
+      <div class="faq-a"><p>ClusterVise generates a structured BOM, stationwise I/O lists, supporting project documentation, and supplier-aware device selections based on the machine description you provide. Outputs expand by plan, with more workflow automation and integrations available in the higher tiers.</p></div>
+    </div>
+
+    <div class="faq-item fade d1" onclick="tFaq(this)">
+      <div class="faq-q">Which component brands and suppliers are in the catalogue?<span class="faq-icon">+</span></div>
+      <div class="faq-a"><p>The catalogue covers 20,000+ components from leading European and international manufacturers across protection, control, automation, and enclosure categories. The full brand list is available on request — <a href="mailto:info@clustervise.com">get in touch</a> and we'll send the current supplier coverage for your region and machine types.</p></div>
+    </div>
+
+    <div class="faq-item fade d2" onclick="tFaq(this)">
+      <div class="faq-q">Can our engineers override or manually select components?<span class="faq-icon">+</span></div>
+      <div class="faq-a"><p>Yes — always, at every step. Designers can browse the full 20,000+ component catalogue, filter by specification or brand, and pick any component manually. The AI's suggestions are exactly that: suggestions. Every manual selection or override also feeds back into the learning model, so it improves with your team's preferences over time.</p></div>
+    </div>
+
+    <div class="faq-item fade d3" onclick="tFaq(this)">
+      <div class="faq-q">Does ClusterVise integrate with CAD or ERP systems?<span class="faq-icon">+</span></div>
+      <div class="faq-a"><p>The Professional plan includes ERP system integration. The Enterprise plan adds CAD integration and a full REST API for custom workflows and pipeline automation. If you have a specific integration requirement — Eplan, AutoCAD Electrical, SAP, or similar — mention it in your enquiry and we'll confirm current or planned support.</p></div>
+    </div>
+
+    <div class="faq-item fade" onclick="tFaq(this)">
+      <div class="faq-q">What happens when a component is out of stock or discontinued?<span class="faq-icon">+</span></div>
+      <div class="faq-a"><p>ClusterVise uses live supplier data, so stock levels and availability are checked at the moment of design — not from a cached catalogue. When a preferred component is unavailable or discontinued, the platform automatically suggests pre-validated alternatives at a comparable specification and price point, so your design stays unblocked.</p></div>
+    </div>
+
+    <div class="faq-item fade d1" onclick="tFaq(this)">
+      <div class="faq-q">How does the AI learn our company's preferences?<span class="faq-icon">+</span></div>
+      <div class="faq-a"><p>Every project your team runs builds the model's understanding of your organisation — preferred brands, trusted component families, and typical machine configurations. No manual curation is needed. Designer overrides and manual selections are also captured automatically. The more projects you run, the more precisely the platform reflects how your team works.</p></div>
+    </div>
+
+    <div class="faq-item fade d2" onclick="tFaq(this)">
+      <div class="faq-q">How long does onboarding take?<span class="faq-icon">+</span></div>
+      <div class="faq-a"><p>After your enquiry, we'll arrange a live walkthrough for your team — typically within 48 hours. Most engineers produce their first AI-generated BOM during the walkthrough session itself. There's no lengthy implementation process: the platform works from plain-language input on day one, and becomes more tailored to your workflows as the team uses it.</p></div>
+    </div>
+
+    <div class="faq-item fade d3" onclick="tFaq(this)">
+      <div class="faq-q">We're still evaluating — can we see the platform in action first?<span class="faq-icon">+</span></div>
+      <div class="faq-a"><p>Absolutely. Send us a message via the contact form with a brief description of the kind of machines you build and we'll set up a live demo tailored to your use case. No commitment required. We're currently in a guided pilot phase, so every new team gets hands-on support from the ClusterVise team through the evaluation process.</p></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Ready to give your engineers more time<br>for the engineering that matters?</h2>
+  <p>Talk to the ClusterVise team about your special purpose machine projects. We'll show you exactly what the platform can do for your workflows.</p>
+  <div class="cta-actions">
+    <button onclick="openModal('General enquiry')" class="btn btn-brand" style="padding:13px 30px;font-size:15px;border:none;cursor:pointer;">Get in touch →</button>
+    <a href="#pricing" class="btn btn-ghost" style="padding:13px 30px;font-size:15px;">See pricing</a>
+  </div>
+  <p style="margin-top:18px;font-size:13px;color:var(--text-3);">info@clustervise.com · We reply within 24 hours</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#top" class="nav-logo" style="text-decoration:none;">
+        <span class="logo-lockup">
+          <img src="assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
+        </span>
+      </a>
+      <p>Engineering intelligence for special purpose machine builders and system integrators.</p>
+      <div class="footer-address">
+        <strong>ClusterVise BV</strong><br/>
+        Besloten Vennootschap · Belgium<br/>
+        Company no. 1032,591,922<br/>
+        Charleroise Steenweg 110<br/>
+        1060 Sint-Gillis (bij-Brussel), Belgium
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#results">Results</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#security">Security</a>
+      <a href="#faq">FAQ</a>
+      <a href="glossary/index.html">Glossary</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="mailto:info@clustervise.com?subject=Request%20a%20demo">Request a demo</a>
+      <a href="mailto:info@clustervise.com">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#security">Security</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ClusterVise BV. All rights reserved. · Sint-Gillis (bij-Brussel), Belgium</span>
+    <span style="color:var(--orange);font-weight:600;">CONFIDENTIAL</span>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+    <div id="modal-form-content">
+      <div class="modal-plan-badge" id="modal-plan-label">✉ Get in touch</div>
+      <div class="modal-title">Talk to the ClusterVise team</div>
+      <p class="modal-sub">Tell us about your project and we'll get back to you within 24 hours.</p>
+      <form id="contact-form" onsubmit="submitContactForm(event)" novalidate>
+        <div class="mf-row">
+          <div class="mf-group">
+            <label for="cf-name">Full name *</label>
+            <input type="text" id="cf-name" placeholder="Your name" required/>
+          </div>
+          <div class="mf-group">
+            <label for="cf-company">Company *</label>
+            <input type="text" id="cf-company" placeholder="Company name" required/>
+          </div>
+        </div>
+        <div class="mf-group">
+          <label for="cf-email">Work email *</label>
+          <input type="email" id="cf-email" placeholder="you@company.com" required/>
+        </div>
+        <div class="mf-group">
+          <label for="cf-plan">Plan of interest</label>
+          <select id="cf-plan">
+            <option value="General enquiry">General enquiry</option>
+            <option value="Starter — €400/month">Starter — €400/month</option>
+            <option value="Professional — €900/month">Professional — €900/month</option>
+            <option value="Enterprise — €1,500/month">Enterprise — €1,500/month</option>
+          </select>
+        </div>
+        <div class="mf-group">
+          <label for="cf-message">Tell us about your project</label>
+          <textarea id="cf-message" placeholder="Describe the machines you build, your team size, or any questions you have…"></textarea>
+        </div>
+        <button type="submit" class="modal-submit">Send enquiry →</button>
+        <p class="modal-footer-note">Your message goes directly to <strong>info@clustervise.com</strong></p>
+        <p class="modal-footer-note" style="margin-top:8px;">
+          If your mail app does not open, write to
+          <a href="mailto:info@clustervise.com" style="color:var(--brand);">info@clustervise.com</a>.
+        </p>
+      </form>
+    </div>
+    <div id="modal-success" class="modal-success">
+      <div class="s-icon">✅</div>
+      <h3>Message sent!</h3>
+      <p>Your enquiry is on its way to the ClusterVise team. We'll reply to <strong id="success-email"></strong> within 24 hours.</p>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-3);">If email does not open automatically, use <a href="contact-team.html" style="color:var(--brand);">our contact page</a>.</p>
+      <button onclick="closeModal()" style="margin-top:22px;padding:11px 28px;background:var(--brand);border:none;border-radius:9px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Reveal on scroll
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+// Bars + counters
+function animateBars(){
+  document.querySelectorAll('[data-w]').forEach(el=>{
+    setTimeout(()=>el.style.width=el.dataset.w,320);
+  });
+}
+
+// Hero word rotator
+const heroRotator=document.getElementById('hero-rotator');
+if(heroRotator){
+  const words=(heroRotator.dataset.words||'').split(',').map(w=>w.trim()).filter(Boolean);
+  let wordIndex=0;
+  if(words.length>1){
+    setInterval(()=>{
+      wordIndex=(wordIndex+1)%words.length;
+      heroRotator.classList.add('out');
+      setTimeout(()=>{
+        heroRotator.textContent=words[wordIndex];
+        heroRotator.classList.remove('out');
+      },220);
+    },1900);
+  }
+}
+
+function startTextRotator(el,interval=2200){
+  if(!el)return;
+  const words=(el.dataset.words||'').split(',').map(w=>w.trim()).filter(Boolean);
+  let wordIndex=0;
+  if(words.length>1){
+    setInterval(()=>{
+      wordIndex=(wordIndex+1)%words.length;
+      el.classList.add('out');
+      setTimeout(()=>{
+        el.textContent=words[wordIndex];
+        el.classList.remove('out');
+      },220);
+    },interval);
+  }
+}
+
+startTextRotator(document.getElementById('feature-rotator'),2000);
+startTextRotator(document.getElementById('results-rotator'),2300);
+
+function countUp(el){
+  if(el.dataset.done)return;el.dataset.done=1;
+  if(el.dataset.text){el.textContent=el.dataset.text;return;}
+  const t=+el.dataset.count,s=el.dataset.suffix||'',d=1400,st=performance.now();
+  const tick=now=>{
+    const p=Math.min((now-st)/d,1),ease=1-Math.pow(1-p,3);
+    el.textContent=(t>=1000?Math.round(ease*t).toLocaleString():Math.round(ease*t))+s;
+    if(p<1)requestAnimationFrame(tick);
+  };requestAnimationFrame(tick);
+}
+new IntersectionObserver(es=>{
+  if(es[0].isIntersecting){animateBars();document.querySelectorAll('.hero-right [data-count],[data-text]').forEach(countUp);}
+},{threshold:.25}).observe(document.querySelector('.hero'));
+new IntersectionObserver(es=>{
+  if(es[0].isIntersecting)document.querySelectorAll('#results [data-count],[data-text]').forEach(countUp);
+},{threshold:.2}).observe(document.getElementById('results'));
+
+// Feature toggle
+function tFeat(el){el.classList.toggle('active');}
+
+// FAQ toggle
+function tFaq(el){
+  const wasOpen=el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+  if(!wasOpen)el.classList.add('open');
+}
+
+// Demo step
+function dStep(el){
+  document.querySelectorAll('.ds').forEach(d=>d.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// Chat demo
+const steps=[
+  {t:'user',av:'SE',txt:'I need a control panel for a 75kW special purpose conveyor system, IP54, outdoor installation in Germany, budget under €8,000.'},
+  {t:'proc',txt:'Reading your requirements...'},
+  {t:'proc',txt:'Checking 20,000+ components against your project requirements...'},
+  {t:'proc',txt:'Resolving 3 constraint conflicts automatically...'},
+  {t:'ai',av:'CV',txt:'Done. 47 devices selected. I resolved a voltage tolerance issue, swapped one PLC saving €340, and upgraded the enclosure to IP55 — still within your budget.'},
+  {t:'result'},
+];
+let timer;
+function startChat(){
+  clearTimeout(timer);
+  document.getElementById('chat').innerHTML='';
+  next(0);
+}
+function next(i){
+  if(i>=steps.length)return;
+  const s=steps[i],box=document.getElementById('chat');
+  let el=document.createElement('div');
+  if(s.t==='proc'){
+    el.className='tproc';el.textContent=s.txt;
+  }else if(s.t==='result'){
+    el.className='tmsg a';
+    el.innerHTML=`<div class="tav a">CV</div><div class="tres"><div class="tres-hdr">✓ Design package ready — 43 seconds</div><div class="tres-row"><span>Devices selected</span><span class="tres-val">47</span></div><div class="tres-row"><span>BOM total</span><span class="tres-val">€7,640</span></div><div class="tres-row"><span>Project fit</span><span class="tres-val">Validated ✓</span></div><div class="tres-row"><span>Documentation</span><span class="tres-val">Generated ✓</span></div><div class="tres-row"><span>Documents</span><span class="tres-val">BOM · I/O Lists · Project Summary</span></div></div>`;
+  }else{
+    el.className=`tmsg ${s.t==='user'?'u':'a'}`;
+    el.innerHTML=`<div class="tav ${s.t==='user'?'e':'a'}">${s.av}</div><div class="tbubble">${s.txt}</div>`;
+  }
+  el.style.cssText='opacity:0;transform:translateY(6px);';
+  box.appendChild(el);box.scrollTop=box.scrollHeight;
+  requestAnimationFrame(()=>{el.style.transition='opacity .4s,transform .4s';el.style.opacity='1';el.style.transform='none';});
+  timer=setTimeout(()=>next(i+1),s.t==='proc'?720:s.t==='user'?480:1100);
+}
+new IntersectionObserver(es=>{
+  if(es[0].isIntersecting&&!document.getElementById('chat').children.length)startChat();
+},{threshold:.2}).observe(document.getElementById('chat'));
+
+// Contact modal
+function openModal(plan){
+  const modal=document.getElementById('contactModal');
+  const sel=document.getElementById('cf-plan');
+  const badge=document.getElementById('modal-plan-label');
+  // set plan dropdown
+  if(plan&&sel){
+    for(let i=0;i<sel.options.length;i++){
+      if(sel.options[i].value.toLowerCase().startsWith(plan.toLowerCase())){sel.selectedIndex=i;break;}
+    }
+  }
+  // update badge label
+  if(badge){
+    const planLabels={'General enquiry':'✉ Get in touch','Starter':'⚡ Starter plan','Professional':'🚀 Professional plan','Enterprise':'🏢 Enterprise plan'};
+    badge.textContent=planLabels[plan]||'✉ Get in touch';
+  }
+  // reset to form view
+  document.getElementById('modal-form-content').style.display='block';
+  document.getElementById('modal-success').style.display='none';
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{const n=document.getElementById('cf-name');if(n)n.focus();},120);
+}
+function closeModal(){
+  document.getElementById('contactModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function submitContactForm(e){
+  e.preventDefault();
+  const name=document.getElementById('cf-name').value.trim();
+  const company=document.getElementById('cf-company').value.trim();
+  const email=document.getElementById('cf-email').value.trim();
+  const plan=document.getElementById('cf-plan').value;
+  const msg=document.getElementById('cf-message').value.trim();
+  if(!name||!company||!email){return;}
+  const subject=encodeURIComponent('ClusterVise Enquiry — '+plan+' — '+company);
+  const body=encodeURIComponent('Name: '+name+'\nCompany: '+company+'\nReply-to: '+email+'\nPlan of interest: '+plan+'\n\nMessage:\n'+(msg||'(no message provided)'));
+  const to='info@clustervise.com';
+  const mailtoHref='mailto:'+to+'?subject='+subject+'&body='+body;
+  const tempLink=document.createElement('a');
+  tempLink.href=mailtoHref;
+  tempLink.style.display='none';
+  document.body.appendChild(tempLink);
+  tempLink.click();
+  tempLink.remove();
+  // show success
+  document.getElementById('success-email').textContent=email;
+  document.getElementById('modal-form-content').style.display='none';
+  document.getElementById('modal-success').style.display='block';
+}
+// close on Escape key
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
