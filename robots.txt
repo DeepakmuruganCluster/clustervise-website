@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clustervise.com/sitemap.xml
