@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Auto BOM Software — Full Project-Level BOM Generation | ClusterVise</title>
+<meta name="description" content="ClusterVise Auto BOM generates a complete, validated bill of materials for special purpose machines in minutes — with stationwise structure, I/O lists, single line diagrams, live pricing, and full project documentation."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://clustervise.com/solutions/auto-bom/"/>
+<meta property="og:title" content="Auto BOM Software — Full Project-Level BOM Generation | ClusterVise"/>
+<meta property="og:description" content="From machine description to validated BOM, stationwise I/O lists, and project documentation — in under 10 minutes. Built for SPM engineering teams."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://clustervise.com/solutions/auto-bom/"/>
+<meta property="og:site_name" content="ClusterVise"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ClusterVise Auto BOM",
+  "description": "Auto BOM software for special purpose machines. Generates validated bills of materials, stationwise I/O lists, single line diagrams, and project documentation from a plain-language machine description.",
+  "url": "https://clustervise.com/solutions/auto-bom/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "url": "https://clustervise.com/#pricing" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --brand:#59E3FF;--brand-dk:#1FBEDC;--brand-lt:rgba(89,227,255,.12);
+  --accent:#8FD65E;--accent-dk:#6FB640;--accent-lt:rgba(143,214,94,.1);
+  --green:#34D399;
+  --bg:#06101B;--bg-2:#0B1726;--bg-3:#132234;
+  --text:#EAF4FF;--text-2:#AABDD3;--text-3:#6F87A1;
+  --border:#1D324A;--border-2:#2A4563;
+  --max:1120px;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:radial-gradient(circle at 14% 0%,rgba(89,227,255,.16),transparent 22%),radial-gradient(circle at 86% 8%,rgba(89,227,255,.08),transparent 18%),linear-gradient(180deg,#08111C 0%,#06101B 44%,#08121D 100%);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;background:linear-gradient(rgba(89,227,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(89,227,255,.03) 1px,transparent 1px);background-size:120px 120px;mask-image:radial-gradient(circle at center,rgba(0,0,0,.7),transparent 88%);opacity:.33;}
+::selection{background:rgba(89,227,255,.22);}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:#2D465F;border-radius:3px;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+.nav-left{display:flex;align-items:center;gap:28px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-lockup{display:inline-flex;align-items:center;justify-content:center;height:36px;width:206px;background:transparent;border:none;border-radius:0;overflow:hidden;box-shadow:none;}
+.logo-lockup img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.015);}
+.nav-links{display:flex;gap:2px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;}
+.nav-links a:hover{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.nav-dropdown{position:relative;display:inline-flex;align-items:center;}
+.nav-dropdown>a{font-size:13px;font-weight:600;color:#F4FAFF;background:rgba(89,227,255,.10);text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;cursor:pointer;}
+.dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(8,18,30,.97);border:1px solid rgba(89,227,255,.18);border-radius:10px;padding:8px 6px 6px;min-width:240px;box-shadow:0 20px 50px rgba(0,0,0,.45);backdrop-filter:blur(16px);flex-direction:column;gap:2px;z-index:200;}
+.nav-dropdown:hover .dropdown-menu{display:flex;}
+.dropdown-menu a{font-size:13px;font-weight:600;color:var(--text-2);padding:9px 14px;border-radius:7px;transition:all .15s;white-space:nowrap;text-decoration:none;display:block;}
+.dropdown-menu a:hover,.dropdown-menu a[data-active]{color:var(--brand);background:var(--brand-lt);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .18s;text-decoration:none;border:none;}
+.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);}
+.btn-brand:hover{filter:brightness(.98);box-shadow:0 14px 30px rgba(31,190,220,.34);}
+.btn-ghost{background:rgba(255,255,255,.02);color:#D7E5F3;border:1px solid rgba(89,227,255,.18);}
+.btn-ghost:hover{background:rgba(89,227,255,.10);color:#fff;border-color:rgba(89,227,255,.34);}
+
+/* BREADCRUMB */
+.breadcrumb{max-width:var(--max);margin:0 auto;padding:18px 40px 0;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-3);}
+.breadcrumb a:hover{color:var(--brand);}
+.breadcrumb .sep{color:var(--border-2);}
+.breadcrumb .current{color:var(--text-2);}
+
+/* HERO */
+.hero{max-width:var(--max);margin:0 auto;padding:72px 40px 64px;}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--brand);background:rgba(89,227,255,.08);border:1px solid rgba(89,227,255,.16);padding:7px 12px;border-radius:999px;margin-bottom:22px;letter-spacing:.10em;text-transform:uppercase;font-family:var(--mono);}
+.blink{width:6px;height:6px;border-radius:50%;background:var(--brand);animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+.hero h1{font-size:clamp(30px,3.6vw,52px);font-weight:800;letter-spacing:-.04em;line-height:1.05;color:var(--text);margin-bottom:22px;max-width:820px;}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--brand) 0%,#87E9B6 45%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .lead{font-size:17.5px;color:#C6D7E8;line-height:1.82;max-width:680px;margin-bottom:32px;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:48px;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.hstat{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid rgba(89,227,255,.12);border-radius:16px;padding:20px 22px;}
+.hstat-val{font-size:30px;font-weight:800;color:var(--brand);letter-spacing:-.025em;margin-bottom:3px;}
+.hstat-lbl{font-size:12px;color:var(--text-2);line-height:1.5;}
+
+/* SECTIONS */
+.section{max-width:var(--max);margin:0 auto;padding:68px 40px;}
+.section-divider{border-top:1px solid var(--border);}
+.label{font-size:11px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.16em;margin-bottom:14px;font-family:var(--mono);}
+.section h2{font-size:clamp(24px,2.6vw,34px);font-weight:800;letter-spacing:-.03em;color:var(--text);margin-bottom:16px;line-height:1.12;}
+.body{font-size:15.5px;color:var(--text-2);line-height:1.82;max-width:760px;}
+.body p{margin-bottom:18px;}
+.body p:last-child{margin-bottom:0;}
+
+/* FEATURES — 2 col expandable */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;}
+.feat{background:linear-gradient(180deg,rgba(10,21,34,.90),rgba(8,17,28,.96));border:1px solid rgba(89,227,255,.12);border-radius:16px;padding:26px;cursor:pointer;transition:all .22s;}
+.feat:hover{border-color:rgba(89,227,255,.32);transform:translateY(-2px);}
+.feat.open{border-color:var(--brand);}
+.feat-head{display:flex;align-items:flex-start;gap:14px;}
+.feat-icon{width:40px;height:40px;border-radius:10px;background:var(--brand-lt);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.feat-title{font-size:14.5px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.feat-sub{font-size:13px;color:var(--text-2);line-height:1.65;}
+.feat-expand{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.feat.open .feat-expand{max-height:200px;border-top:1px solid var(--border);margin-top:16px;padding-top:14px;}
+.feat-expand ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.feat-expand li{font-size:12.5px;color:var(--text-2);display:flex;align-items:flex-start;gap:8px;line-height:1.55;}
+.feat-expand li::before{content:'✓';color:var(--green);font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:48px;}
+.steps::before{content:'';position:absolute;top:22px;left:calc(12.5% + 12px);right:calc(12.5% + 12px);height:2px;background:linear-gradient(90deg,var(--brand),rgba(89,227,255,.2));z-index:0;}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px;}
+.step-num{width:44px;height:44px;border-radius:50%;background:var(--brand);color:#032638;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:18px;position:relative;z-index:1;box-shadow:0 0 0 5px var(--bg),0 0 0 7px rgba(89,227,255,.18);}
+.step-title{font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.step-desc{font-size:12.5px;color:var(--text-2);line-height:1.65;}
+
+/* ROI */
+.roi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px;}
+.roi-card{background:linear-gradient(180deg,rgba(10,21,34,.88),rgba(8,17,28,.96));border:1px solid rgba(89,227,255,.12);border-radius:16px;padding:24px;}
+.roi-num{font-size:32px;font-weight:800;color:var(--brand);letter-spacing:-.025em;margin-bottom:5px;}
+.roi-lbl{font-size:13px;color:var(--text-2);line-height:1.5;}
+.roi-sub{font-size:11.5px;color:var(--accent);font-weight:600;margin-top:3px;}
+
+/* OUTPUT SHOWCASE */
+.output-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;}
+.output-card{background:linear-gradient(180deg,rgba(10,21,34,.90),rgba(8,17,28,.96));border:1px solid rgba(89,227,255,.10);border-radius:14px;padding:22px;}
+.output-tag{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-lt);border:1px solid rgba(143,214,94,.2);padding:3px 10px;border-radius:4px;letter-spacing:.06em;text-transform:uppercase;display:inline-block;margin-bottom:12px;}
+.output-card h3{font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.output-card p{font-size:13px;color:var(--text-2);line-height:1.7;}
+
+/* CTA */
+.cta-band{background:linear-gradient(180deg,rgba(8,17,28,.94),rgba(7,16,27,.98)),radial-gradient(circle at top center,rgba(143,214,94,.08),transparent 24%),radial-gradient(circle at 20% 30%,rgba(89,227,255,.08),transparent 24%);padding:80px 40px;text-align:center;border-top:1px solid rgba(89,227,255,.12);border-bottom:1px solid rgba(89,227,255,.12);}
+.cta-band h2{font-size:clamp(26px,2.8vw,38px);font-weight:800;color:#fff;margin-bottom:14px;letter-spacing:-.035em;line-height:1.1;}
+.cta-band p{font-size:16px;color:#A8BDCF;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.76;}
+.cta-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));border-top:1px solid rgba(89,227,255,.12);padding:52px 40px 32px;}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.4fr auto auto auto auto;gap:44px;align-items:start;}
+.footer-brand p{font-size:13px;color:var(--text-3);margin-top:10px;line-height:1.65;max-width:240px;}
+.footer-col h4{font-size:11.5px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:var(--text-2);text-decoration:none;margin-bottom:9px;transition:color .15s;}
+.footer-col a:hover{color:var(--brand);}
+.footer-bottom{max-width:var(--max);margin:28px auto 0;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3);flex-wrap:wrap;gap:8px;}
+
+@media(max-width:960px){
+  nav{padding:0 18px;}
+  .nav-links{display:none;}
+  .hero,.section{padding-left:20px;padding-right:20px;}
+  .hero{padding-top:48px;padding-bottom:44px;}
+  .feat-grid,.roi-grid,.output-grid{grid-template-columns:1fr;}
+  .hero-stats{grid-template-columns:1fr 1fr;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .steps::before{display:none;}
+  .footer-inner{grid-template-columns:1fr;gap:24px;}
+  .cta-band{padding:60px 20px;}
+  .breadcrumb{padding-left:20px;padding-right:20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">
+      <span class="logo-lockup">
+        <img src="../../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="/#how-it-works">How it works</a>
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/glossary/">Glossary</a>
+      <div class="nav-dropdown">
+        <a>Solutions ▾</a>
+        <div class="dropdown-menu">
+          <a href="/solutions/auto-bom/" data-active>Auto BOM</a>
+          <a href="/solutions/training-module/">Training Module</a>
+          <a href="/solutions/parts-component-library/">Parts &amp; Component Library</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button onclick="location.href='/contact/'" class="btn btn-brand">Get in touch</button>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="/">Home</a>
+  <span class="sep">›</span>
+  <a href="/#solutions">Solutions</a>
+  <span class="sep">›</span>
+  <span class="current">Auto BOM</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow"><span class="blink"></span>Auto BOM</div>
+  <h1>From machine description to <em>full project package</em> in minutes.</h1>
+  <p class="lead">ClusterVise Auto BOM doesn't just produce a parts list. It generates the complete project-level output your engineering team needs to move forward — validated BOM, stationwise I/O lists, single line diagram, cabinet sizing, manpower estimate, and a project summary document. All from a plain-language description of the machine.</p>
+  <div class="hero-actions">
+    <button onclick="location.href='/contact/'" class="btn btn-brand" style="padding:11px 26px;font-size:14px;">Book a demo →</button>
+    <a href="/#how-it-works" class="btn btn-ghost" style="padding:11px 26px;font-size:14px;">See how it works</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-val">10×</div><div class="hstat-lbl">Faster design output vs. manual</div></div>
+    <div class="hstat"><div class="hstat-val">~17h</div><div class="hstat-lbl">Engineering hours freed per project</div></div>
+    <div class="hstat"><div class="hstat-val">20k+</div><div class="hstat-lbl">Validated components</div></div>
+    <div class="hstat"><div class="hstat-val">43 sec</div><div class="hstat-lbl">Fastest recorded generation</div></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section-divider">
+<div class="section">
+  <div class="label">How it works</div>
+  <h2>Four steps from requirement to design-ready package.</h2>
+  <div class="body">
+    <p>Your engineers describe the machine in plain language — type, power, environment, applicable standards, budget, number of stations, motor types. ClusterVise reads the requirements, applies engineering selection logic across all inputs simultaneously, and generates a complete project output. No templates to fill. No form fields to map.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Describe the machine</div>
+      <div class="step-desc">Type, power, environment, standards, budget, and operating context — in plain language.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">AI selects components</div>
+      <div class="step-desc">20,000+ components evaluated against all requirements simultaneously. Conflicts resolved automatically.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Review and override</div>
+      <div class="step-desc">Engineers review every selection. Override any item. Browse the full catalogue and pick manually at any point.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Export the package</div>
+      <div class="step-desc">BOM, I/O lists, SLD, project summary — exported to Excel, PDF, or CSV. Ready for procurement and sign-off.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PROJECT OUTPUT -->
+<div class="section-divider">
+<div class="section">
+  <div class="label">Project output</div>
+  <h2>Everything the project needs. Generated in one pass.</h2>
+  <div class="body">
+    <p>Auto BOM doesn't stop at the parts list. Every generation includes the full set of project-level documents your team needs to move from design to procurement to build — structured, validated, and ready to export.</p>
+  </div>
+  <div class="output-grid">
+    <div class="output-card">
+      <div class="output-tag">Core output</div>
+      <h3>Stationwise BOM</h3>
+      <p>Components structured by station across the full machine — not a flat list. Directly usable in panel build planning and procurement.</p>
+    </div>
+    <div class="output-card">
+      <div class="output-tag">Core output</div>
+      <h3>Stationwise I/O Lists</h3>
+      <p>Per-station I/O lists generated automatically from the design. Ready for direct use in PLC programming and panel design documentation.</p>
+    </div>
+    <div class="output-card">
+      <div class="output-tag">Core output</div>
+      <h3>Single Line Diagram</h3>
+      <p>SLD generated automatically alongside the BOM. Includes SCCR report and key circuit parameters.</p>
+    </div>
+    <div class="output-card">
+      <div class="output-tag">Project document</div>
+      <h3>Cabinet Size Estimate</h3>
+      <p>Enclosure size calculated automatically from the selected component set — no manual calculation needed.</p>
+    </div>
+    <div class="output-card">
+      <div class="output-tag">Project document</div>
+      <h3>Manpower Estimate</h3>
+      <p>Build time and manpower estimate included per project, derived from the design complexity and component count.</p>
+    </div>
+    <div class="output-card">
+      <div class="output-tag">Project document</div>
+      <h3>Project Summary</h3>
+      <p>A structured project summary document — machine description, key design decisions, total BOM cost, and validation status — generated alongside every output.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FEATURES -->
+<div class="section-divider">
+<div class="section">
+  <div class="label">Platform features</div>
+  <h2>The selection intelligence that makes the output reliable.</h2>
+  <div class="feat-grid">
+    <div class="feat" onclick="this.classList.toggle('open')">
+      <div class="feat-head">
+        <div class="feat-icon">🔮</div>
+        <div>
+          <div class="feat-title">Predicts what you need</div>
+          <div class="feat-sub">Infers missing specs from high-level descriptions and offers multiple design options ranked by cost and lead time.</div>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Infers missing specs from high-level machine descriptions</li>
+          <li>Catches constraint issues before they appear downstream</li>
+          <li>Offers multiple design options ranked by cost and lead time</li>
+          <li>Generates a complete BOM even from partial input</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat" onclick="this.classList.toggle('open')">
+      <div class="feat-head">
+        <div class="feat-icon">⚙️</div>
+        <div>
+          <div class="feat-title">Picks the right device every time</div>
+          <div class="feat-sub">Searches 20,000+ components and selects the optimal device across cost, availability, lead time, and specification fit simultaneously.</div>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Searches 20,000+ components across multiple suppliers</li>
+          <li>Matches device choices to project requirements automatically</li>
+          <li>Suggests alternatives when devices are out of stock</li>
+          <li>Optimises for total project cost, not just unit price</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat" onclick="this.classList.toggle('open')">
+      <div class="feat-head">
+        <div class="feat-icon">✅</div>
+        <div>
+          <div class="feat-title">Design logic built in from the start</div>
+          <div class="feat-sub">Every design is structured before your engineer sees it — conflicts resolved, compatibility verified, reports generated alongside.</div>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Inter-component compatibility verified automatically</li>
+          <li>Single line diagram and SCCR report generated</li>
+          <li>Supporting project documents created alongside the BOM</li>
+          <li>Only genuine edge cases escalate to human review</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat" onclick="this.classList.toggle('open')">
+      <div class="feat-head">
+        <div class="feat-icon">📡</div>
+        <div>
+          <div class="feat-title">Live stock and supplier data</div>
+          <div class="feat-sub">Pricing, availability, and lead times are checked at generation time — not from a cached catalogue.</div>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Live pricing across supported brands</li>
+          <li>Stock check and prioritisation at generation time</li>
+          <li>Lead time estimates with confidence levels</li>
+          <li>Budget validation against project targets</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat" onclick="this.classList.toggle('open')">
+      <div class="feat-head">
+        <div class="feat-icon">🧬</div>
+        <div>
+          <div class="feat-title">Learns your organisation's preferences</div>
+          <div class="feat-sub">Every project enriches the model — preferred brands, component families, and design patterns captured automatically.</div>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Learns preferred suppliers, brands, and component families</li>
+          <li>Every project enriches the model — no manual curation needed</li>
+          <li>Flags when a new design diverges from past patterns</li>
+          <li>Project history becomes a searchable design library for the team</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feat" onclick="this.classList.toggle('open')">
+      <div class="feat-head">
+        <div class="feat-icon">🎯</div>
+        <div>
+          <div class="feat-title">Full engineer override at every step</div>
+          <div class="feat-sub">Every AI selection is visible and overridable. Browse the full 20,000+ catalogue and pick manually at any point.</div>
+        </div>
+      </div>
+      <div class="feat-expand">
+        <ul>
+          <li>Review and override any component selection</li>
+          <li>Browse full catalogue with spec filtering</li>
+          <li>Manual selections feed back into the learning model</li>
+          <li>Export at any stage — partial or complete</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ROI -->
+<div class="section-divider">
+<div class="section">
+  <div class="label">ROI &amp; Impact</div>
+  <h2>The numbers behind the time saving.</h2>
+  <div class="body">
+    <p>The return is not just faster BOM generation — it is the downstream cost of errors eliminated, and the project capacity recovered when engineers are no longer spending their day on catalogue administration.</p>
+  </div>
+  <div class="roi-grid">
+    <div class="roi-card">
+      <div class="roi-num">65%</div>
+      <div class="roi-lbl">Reduction in design cycle time</div>
+      <div class="roi-sub">Across SPM project types</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">~17h</div>
+      <div class="roi-lbl">Engineering hours freed per project</div>
+      <div class="roi-sub">Available for higher-value work</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">8 min</div>
+      <div class="roi-lbl">Average BOM generation time</div>
+      <div class="roi-sub">vs. 17 hours manually</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">Day 1</div>
+      <div class="roi-lbl">First BOM in your onboarding session</div>
+      <div class="roi-sub">No lengthy implementation</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <h2>See the full project package generated live.</h2>
+  <p>Book a walkthrough and we'll run Auto BOM on a machine type representative of your work. BOM, I/O lists, SLD, and project documents — generated in the session.</p>
+  <div class="cta-actions">
+    <button onclick="location.href='/contact/'" class="btn btn-brand" style="padding:13px 30px;font-size:15px;border:none;cursor:pointer;">Book a demo →</button>
+    <a href="/#pricing" class="btn btn-ghost" style="padding:13px 30px;font-size:15px;">See pricing</a>
+  </div>
+  <p style="margin-top:18px;font-size:13px;color:var(--text-3);">info@clustervise.com · We reply within 24 hours</p>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" style="text-decoration:none;">
+        <span class="logo-lockup">
+          <img src="../../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
+        </span>
+      </a>
+      <p>Engineering intelligence for special purpose machine builders and system integrators.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="/#how-it-works">How it works</a>
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/glossary/">Glossary</a>
+    </div>
+    <div class="footer-col">
+      <h4>Solutions</h4>
+      <a href="/solutions/auto-bom/">Auto BOM</a>
+      <a href="/solutions/training-module/">Training Module</a>
+      <a href="/solutions/parts-component-library/">Parts &amp; Component Library</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="mailto:info@clustervise.com?subject=Request%20a%20demo">Request a demo</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/#security">Security</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ClusterVise BV. All rights reserved. · Sint-Gillis (bij-Brussel), Belgium</span>
+    <span>Engineering intelligence for industrial automation teams</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -18,6 +18,23 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Solution pages -->
+  <url>
+    <loc>https://clustervise.com/solutions/auto-bom/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/solutions/training-module/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/solutions/parts-component-library/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Glossary articles -->
   <url>
     <loc>https://clustervise.com/glossary/actuator-sizing</loc>
