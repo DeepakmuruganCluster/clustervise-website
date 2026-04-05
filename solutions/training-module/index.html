@@ -103,7 +103,32 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
   .footer-inner{grid-template-columns:1fr;gap:24px;}
   .cta-band{padding:56px 20px;}
   .breadcrumb{padding-left:20px;padding-right:20px;}
+  .mf-row{grid-template-columns:1fr;}
 }
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(10,22,40,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#0C1828;border:1px solid var(--border);border-radius:22px;padding:40px;width:100%;max-width:500px;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.45);animation:modal-in .25s cubic-bezier(.16,1,.3,1);}
+@keyframes modal-in{from{opacity:0;transform:translateY(18px) scale(.97);}to{opacity:1;transform:none;}}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--bg-3);border:none;cursor:pointer;font-size:18px;line-height:1;color:var(--text-3);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.modal-close:hover{background:var(--border-2);color:var(--text);}
+.modal-plan-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--accent);background:var(--accent-lt);padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.04em;}
+.modal-title{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.022em;margin-bottom:5px;}
+.modal-sub{font-size:13.5px;color:var(--text-2);line-height:1.65;margin-bottom:26px;}
+.mf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mf-group{margin-bottom:14px;}
+.mf-group label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px;}
+.mf-group input,.mf-group select,.mf-group textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);transition:border-color .15s;outline:none;-webkit-appearance:none;}
+.mf-group input:focus,.mf-group select:focus,.mf-group textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(89,227,255,.08);}
+.mf-group textarea{min-height:88px;resize:vertical;line-height:1.6;}
+.mf-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+.modal-submit{width:100%;padding:13px;background:linear-gradient(90deg,var(--brand),var(--accent));border:none;border-radius:10px;color:#032638;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:filter .18s;margin-top:4px;letter-spacing:-.01em;}
+.modal-submit:hover{filter:brightness(.95);}
+.modal-footer-note{font-size:11.5px;color:var(--text-3);text-align:center;margin-top:11px;}
+.modal-success{display:none;text-align:center;padding:12px 0 8px;}
+.modal-success .s-icon{font-size:48px;margin-bottom:16px;}
+.modal-success h3{font-size:21px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:8px;}
+.modal-success p{font-size:14px;color:var(--text-2);line-height:1.7;max-width:340px;margin:0 auto;}
 </style>
 </head>
 <body>
@@ -131,7 +156,7 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
     </div>
   </div>
   <div class="nav-right">
-    <button onclick="location.href='/contact/'" class="btn btn-brand">Get in touch</button>
+    <button onclick="openModal('General enquiry')" class="btn btn-brand">Get in touch</button>
   </div>
   </div>
 </nav>
@@ -149,7 +174,7 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
   <h1>Training that actually covers the job.</h1>
   <p class="lead">Generic training platforms aren't built for engineering. They don't handle version-specific procedures, standards-based content, or the kind of judgment calls that take years to develop on the job.</p>
   <div class="hero-actions">
-    <button onclick="location.href='/contact/'" class="btn btn-brand" style="padding:11px 26px;font-size:14px;">Book a demo →</button>
+    <button onclick="openModal('Book a demo')" class="btn btn-brand" style="padding:11px 26px;font-size:14px;">Book a demo →</button>
     <a href="/#how-it-works" class="btn btn-ghost" style="padding:11px 26px;font-size:14px;">See how it works</a>
   </div>
 </div>
@@ -207,7 +232,7 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
   <h2>Training your team can actually learn from.</h2>
   <p>Book a walkthrough and see how the Training Module fits into your onboarding and upskilling workflows.</p>
   <div class="cta-actions">
-    <button onclick="location.href='/contact/'" class="btn btn-brand" style="padding:12px 28px;font-size:14.5px;border:none;cursor:pointer;">Book a demo →</button>
+    <button onclick="openModal('Book a demo')" class="btn btn-brand" style="padding:12px 28px;font-size:14.5px;border:none;cursor:pointer;">Book a demo →</button>
     <a href="/#pricing" class="btn btn-ghost" style="padding:12px 28px;font-size:14.5px;">See pricing</a>
   </div>
   <p style="margin-top:16px;font-size:13px;color:var(--text-3);">info@clustervise.com · We reply within 24 hours</p>
@@ -252,5 +277,59 @@ footer{background:linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));bo
   </div>
 </footer>
 
+<!-- BOOK A DEMO MODAL -->
+<div id="contactModal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+    <div id="modal-form-content">
+      <div class="modal-plan-badge" id="modal-plan-label">📅 Book a demo</div>
+      <div class="modal-title">See ClusterVise in action</div>
+      <p class="modal-sub">Tell us about your project and we'll get back to you within 24 hours.</p>
+      <form id="contact-form" action="https://formsubmit.co/info@clustervise.com" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="ClusterVise demo request"/>
+        <input type="hidden" name="_template" value="table"/>
+        <input type="hidden" name="_captcha" value="false"/>
+        <input type="hidden" name="_next" value="https://clustervise.com/thank-you.html"/>
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none"/>
+        <div class="mf-row">
+          <div class="mf-group">
+            <label for="cf-name">Full name *</label>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" required/>
+          </div>
+          <div class="mf-group">
+            <label for="cf-company">Company *</label>
+            <input type="text" id="cf-company" name="company" placeholder="Company name" required/>
+          </div>
+        </div>
+        <div class="mf-group">
+          <label for="cf-email">Work email *</label>
+          <input type="email" id="cf-email" name="email" placeholder="you@company.com" required/>
+        </div>
+        <div class="mf-group">
+          <label for="cf-message">Tell us about your project</label>
+          <textarea id="cf-message" name="message" placeholder="Describe the machines you build, your team size, or any questions you have…"></textarea>
+        </div>
+        <button type="submit" class="modal-submit">Book demo →</button>
+        <p class="modal-footer-note">Your message goes directly to <strong>info@clustervise.com</strong></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(plan){
+  const modal=document.getElementById('contactModal');
+  const badge=document.getElementById('modal-plan-label');
+  if(badge){badge.textContent=plan==='General enquiry'?'✉ Get in touch':'📅 Book a demo';}
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{const n=document.getElementById('cf-name');if(n)n.focus();},120);
+}
+function closeModal(){
+  document.getElementById('contactModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
 </body>
 </html>
