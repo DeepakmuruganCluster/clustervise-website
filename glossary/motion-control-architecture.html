@@ -82,7 +82,8 @@ body::before {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: #2D465F; border-radius: 3px; }
 a { color: inherit; text-decoration: none; }
-nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+.nav-inner{width:100%;max-width:var(--max);padding:0 40px;display:flex;align-items:center;justify-content:space-between;margin:0 auto;}
 .nav-left{display:flex;align-items:center;gap:28px;}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .logo-lockup{display:inline-flex;align-items:center;justify-content:center;height:36px;width:206px;background:transparent;border:none;border-radius:0;overflow:hidden;box-shadow:none;}
@@ -90,10 +91,17 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
 .nav-links{display:flex;gap:2px;}
 .nav-links a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;}
 .nav-links a:hover,.nav-links a[data-active]{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.nav-dropdown{position:relative;display:inline-flex;align-items:center;}
+.nav-dropdown>a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;cursor:pointer;}
+.nav-dropdown:hover>a{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(8,18,30,.96);backdrop-filter:blur(12px);border:1px solid rgba(89,227,255,.12);border-radius:12px;padding:8px;flex-direction:column;gap:4px;min-width:200px;box-shadow:0 12px 32px rgba(0,0,0,.3);}
+.nav-dropdown:hover .dropdown-menu{display:flex;}
+.dropdown-menu a{padding:8px 12px;font-size:12.5px;color:#C6D7E8;border-radius:6px;transition:all .15s;white-space:nowrap;}
+.dropdown-menu a:hover{color:#fff;background:rgba(89,227,255,.12);}
 .nav-right{display:flex;align-items:center;gap:10px;}
 .btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .18s;text-decoration:none;border:none;}
-.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);}
-.btn-brand:hover{filter:brightness(.98);box-shadow:0 14px 30px rgba(31,190,220,.34);}
+.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);transition:all 0.3s cubic-bezier(0.16,1,0.3,1);}
+.btn-brand:hover{filter:brightness(1.1);box-shadow:0 0 24px rgba(89,227,255,.5), 0 14px 30px rgba(31,190,220,.34);transform:translateY(-2px);}
 .breadcrumb {
   max-width: var(--max); margin: 0 auto; padding: 18px 40px 0;
   display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-3);
@@ -110,6 +118,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
   color: var(--accent); background: var(--accent-lt); border: 1px solid rgba(143,214,94,.2);
   padding: 4px 12px; border-radius: 4px; letter-spacing: .04em; text-transform: uppercase;
 }
+.art-header { margin-bottom: 56px; }
 .art-header h1 {
   font-size: clamp(26px, 4vw, 42px); font-weight: 800; letter-spacing: -.03em;
   line-height: 1.08; margin-bottom: 20px;
@@ -125,14 +134,14 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
   background: linear-gradient(180deg,rgba(12,24,38,.84),rgba(7,16,27,.94)); border-radius: 18px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 16px 36px rgba(0,0,0,.22);
 }
-section { margin-bottom: 44px; scroll-margin-top: 80px; }
+section { margin-top: 60px; margin-bottom: 44px; scroll-margin-top: 80px; }
 .sec-head {
   display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-family: var(--mono);
   font-size: 10px; font-weight: 600; color: var(--brand); letter-spacing: .1em; text-transform: uppercase;
 }
 .sec-head::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 section p { font-family: var(--serif); font-size: 16px; font-weight: 300; color: var(--text-2); line-height: 1.82; }
-.bullet-list, .callout-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.bullet-list, .callout-list { margin-left: 2px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .bullet-list li, .callout-list li {
   display: grid; grid-template-columns: 20px 1fr; gap: 8px;
   font-family: var(--serif); font-size: 15.5px; font-weight: 300; color: var(--text-2); line-height: 1.75;
@@ -221,13 +230,16 @@ section p { font-family: var(--serif); font-size: 16px; font-weight: 300; color:
 @media (max-width: 860px) {
   .page { grid-template-columns: 1fr; padding: 24px 20px 60px; }
   .sidebar { position: static; }
+  .nav-inner { padding: 0 20px; }
   .nav-links { display: none; }
+  .breadcrumb { padding-left: 20px; padding-right: 20px; }
 }
 </style>
 </head>
 <body>
 <nav>
-  <div class="nav-left">
+  <div class="nav-inner">
+    <div class="nav-left">
     <a href="/" class="nav-logo">
       <span class="logo-lockup">
         <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
@@ -235,16 +247,21 @@ section p { font-family: var(--serif); font-size: 16px; font-weight: 300; color:
     </a>
     <div class="nav-links">
       <a href="/#how-it-works">How it works</a>
-      <a href="/#features">Features</a>
-      <a href="/#results">Results</a>
       <a href="/#pricing">Pricing</a>
-      <a href="/#security">Security</a>
-      <a href="/#faq">FAQ</a>
       <a href="/glossary/" data-active>Glossary</a>
+      <div class="nav-dropdown">
+        <a href="/#solutions">Solutions ▾</a>
+        <div class="dropdown-menu">
+          <a href="/solutions/auto-bom/">Auto BOM</a>
+          <a href="/solutions/training-module/">Training Module</a>
+          <a href="/solutions/parts-component-library/">Parts &amp; Component Library</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="nav-right">
     <button onclick="location.href='/contact/'" class="btn btn-brand">Get in touch</button>
+  </div>
   </div>
 </nav>
 <div class="breadcrumb">

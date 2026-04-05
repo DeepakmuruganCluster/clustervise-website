@@ -85,7 +85,8 @@ body::before {
 a { color: inherit; text-decoration: none; }
 
 /* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+.nav-inner{width:100%;max-width:var(--max);padding:0 40px;display:flex;align-items:center;justify-content:space-between;margin:0 auto;}
 .nav-left{display:flex;align-items:center;gap:28px;}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .logo-lockup{display:inline-flex;align-items:center;justify-content:center;height:36px;width:206px;background:transparent;border:none;border-radius:0;overflow:hidden;box-shadow:none;}
@@ -410,7 +411,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
 
 <!-- NAV -->
 <nav>
-  <div class="nav-left">
+  <div class="nav-inner">
+    <div class="nav-left">
     <a href="/" class="nav-logo">
       <span class="logo-lockup">
         <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
@@ -432,6 +434,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
   </div>
   <div class="nav-right">
     <button onclick="location.href='/contact/'" class="btn btn-brand">Get in touch</button>
+  </div>
   </div>
 </nav>
 
