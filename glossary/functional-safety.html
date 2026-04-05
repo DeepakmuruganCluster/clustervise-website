@@ -130,6 +130,26 @@ section p+p {margin-top:14px;} section p strong {font-weight:600;color:var(--tex
   .nav-links { display: none; }
   .breadcrumb { padding-left: 20px; padding-right: 20px; }
 }
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(10,22,40,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#0C1828;border:1px solid var(--border);border-radius:22px;padding:40px;width:100%;max-width:500px;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.45);animation:modal-in .25s cubic-bezier(.16,1,.3,1);}
+@keyframes modal-in{from{opacity:0;transform:translateY(18px) scale(.97);}to{opacity:1;transform:none;}}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--bg-3);border:none;cursor:pointer;font-size:18px;line-height:1;color:var(--text-3);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.modal-close:hover{background:var(--border-2);color:var(--text);}
+.modal-plan-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--accent);background:var(--accent-lt);padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.04em;}
+.modal-title{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.022em;margin-bottom:5px;}
+.modal-sub{font-size:13.5px;color:var(--text-2);line-height:1.65;margin-bottom:26px;}
+.mf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mf-group{margin-bottom:14px;}
+.mf-group label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px;}
+.mf-group input,.mf-group select,.mf-group textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);transition:border-color .15s;outline:none;-webkit-appearance:none;}
+.mf-group input:focus,.mf-group select:focus,.mf-group textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(89,227,255,.08);}
+.mf-group textarea{min-height:88px;resize:vertical;line-height:1.6;}
+.mf-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+.modal-submit{width:100%;padding:13px;background:linear-gradient(90deg,var(--brand),var(--accent));border:none;border-radius:10px;color:#032638;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:filter .18s;margin-top:4px;letter-spacing:-.01em;}
+.modal-submit:hover{filter:brightness(.95);}
+.modal-footer-note{font-size:11.5px;color:var(--text-3);text-align:center;margin-top:11px;}
 </style>
 </head>
 <body>
@@ -156,7 +176,7 @@ section p+p {margin-top:14px;} section p strong {font-weight:600;color:var(--tex
     </div>
   </div>
   <div class="nav-right">
-    <button onclick="location.href='/contact/'" class="btn btn-brand">Get in touch</button>
+    <button onclick="openModal('General enquiry')" class="btn btn-brand">Get in touch</button>
   </div>
   </div>
 </nav>
@@ -280,7 +300,7 @@ section p+p {margin-top:14px;} section p strong {font-weight:600;color:var(--tex
     <div class="cta-card">
       <h3>Get your safety I/O list generated with PLr mapping</h3>
       <p>ClusterVise generates safety I/O architecture, module sizing, and a safety function register from your risk assessment inputs — ready for ISO 13849 documentation.</p>
-      <a href="/" class="cta-btn">Request a Pilot</a>
+      <button onclick="openModal('General enquiry')" class="cta-btn">Get in touch</button>
     </div>
     <div class="sb-card">
       <div class="sb-title">Platform stats</div>
@@ -311,6 +331,61 @@ const tocObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) { const id = entry.target.id; tocLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + id); }); } });
 }, { rootMargin: '-30% 0px -60% 0px' });
 sections.forEach(s => tocObs.observe(s));
+</script>
+
+<!-- GET IN TOUCH MODAL -->
+<div id="contactModal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+    <div id="modal-form-content">
+      <div class="modal-plan-badge" id="modal-plan-label">✉ Get in touch</div>
+      <div class="modal-title">Talk to the ClusterVise team</div>
+      <p class="modal-sub">Tell us about your project and we'll get back to you within 24 hours.</p>
+      <form id="contact-form" action="https://formsubmit.co/info@clustervise.com" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="ClusterVise website enquiry"/>
+        <input type="hidden" name="_template" value="table"/>
+        <input type="hidden" name="_captcha" value="false"/>
+        <input type="hidden" name="_next" value="https://clustervise.com/thank-you.html"/>
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none"/>
+        <div class="mf-row">
+          <div class="mf-group">
+            <label for="cf-name">Full name *</label>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" required/>
+          </div>
+          <div class="mf-group">
+            <label for="cf-company">Company *</label>
+            <input type="text" id="cf-company" name="company" placeholder="Company name" required/>
+          </div>
+        </div>
+        <div class="mf-group">
+          <label for="cf-email">Work email *</label>
+          <input type="email" id="cf-email" name="email" placeholder="you@company.com" required/>
+        </div>
+        <div class="mf-group">
+          <label for="cf-message">Tell us about your project</label>
+          <textarea id="cf-message" name="message" placeholder="Describe the machines you build, your team size, or any questions you have…"></textarea>
+        </div>
+        <button type="submit" class="modal-submit">Send message →</button>
+        <p class="modal-footer-note">Your message goes directly to <strong>info@clustervise.com</strong></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(plan){
+  const modal=document.getElementById('contactModal');
+  const badge=document.getElementById('modal-plan-label');
+  if(badge){badge.textContent='✉ Get in touch';}
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{const n=document.getElementById('cf-name');if(n)n.focus();},120);
+}
+function closeModal(){
+  document.getElementById('contactModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 </script>
 </body>
 </html>
