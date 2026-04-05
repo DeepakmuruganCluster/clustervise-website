@@ -93,11 +93,17 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
 .nav-links{display:flex;gap:2px;}
 .nav-links a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;}
 .nav-links a:hover,.nav-links a[data-active]{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.nav-dropdown{position:relative;display:inline-flex;align-items:center;}
+.nav-dropdown>a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;cursor:pointer;}
+.nav-dropdown:hover>a{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(8,18,30,.96);backdrop-filter:blur(12px);border:1px solid rgba(89,227,255,.12);border-radius:12px;padding:8px;flex-direction:column;gap:4px;min-width:200px;box-shadow:0 12px 32px rgba(0,0,0,.3);}
+.nav-dropdown:hover .dropdown-menu{display:flex;}
+.dropdown-menu a{padding:8px 12px;font-size:12.5px;color:#C6D7E8;border-radius:6px;transition:all .15s;white-space:nowrap;}
+.dropdown-menu a:hover{color:#fff;background:rgba(89,227,255,.12);}
 .nav-right{display:flex;align-items:center;gap:10px;}
 .btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .18s;text-decoration:none;border:none;}
-.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);}
-.btn-brand:hover{filter:brightness(.98);box-shadow:0 14px 30px rgba(31,190,220,.34);}
-.nav-cta:hover { filter: brightness(.98); box-shadow: 0 14px 30px rgba(31,190,220,.34); }
+.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);transition:all 0.3s cubic-bezier(0.16,1,0.3,1);}
+.btn-brand:hover{filter:brightness(1.1);box-shadow:0 0 24px rgba(89,227,255,.5), 0 14px 30px rgba(31,190,220,.34);transform:translateY(-2px);}
 
 /* BREADCRUMB */
 .breadcrumb {
@@ -211,7 +217,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
 /* FILTER BAR */
 .filter-wrap {
   max-width: var(--max); margin: 0 auto;
-  padding: 0 40px 34px;
+  padding: 40px 40px 34px;
 }
 .filter-label {
   font-family: 'JetBrains Mono', monospace;
@@ -285,19 +291,22 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
   border-radius: 22px;
   padding: 24px;
   display: flex; flex-direction: column;
-  transition: border-color .22s, transform .22s, box-shadow .22s;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.025), 0 18px 40px rgba(0,0,0,.24);
 }
+.card > * { position: relative; z-index: 1; }
 .card::before {
   content: '';
   position: absolute; inset: 0;
   border-radius: 22px;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(89,227,255,.06), transparent 36%, transparent 68%, rgba(143,214,94,.04) 100%);
-  opacity: 1;
+  background: radial-gradient(500px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(89,227,255,.1), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
 }
 .card::after {
   content: '';
@@ -305,12 +314,12 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
   height: 2px;
   background: linear-gradient(90deg, rgba(89,227,255,.85), rgba(143,214,94,.75));
   opacity: 0;
-  transition: opacity .22s;
+  transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1);
 }
 .card:hover {
-  border-color: rgba(89,227,255,.24);
-  transform: translateY(-4px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 24px 50px rgba(0,0,0,.32);
+  border-color: rgba(89,227,255,.5);
+  box-shadow: 0 0 30px rgba(89,227,255,.15), inset 0 1px 0 rgba(255,255,255,.05), 0 24px 50px rgba(0,0,0,.30);
+  transform: translateY(-6px);
 }
 .card:hover::after { opacity: 1; }
 .card-cat {
@@ -390,8 +399,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
   .nav-links, .search-box { display: none; }
   .card-grid { grid-template-columns: 1fr; }
   .hero-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .filter-row { padding: 14px; }
+  .filter-row { padding: 14px; gap: 8px; }
+  .filter-btn { font-size: 11.5px; padding: 6px 12px; }
   .nav-inner, .breadcrumb, .hero, .filter-wrap, .grid-wrap, .footer { padding-left: 20px; padding-right: 20px; }
+  .filter-wrap { padding-top: 30px; }
 }
 </style>
 </head>
@@ -407,12 +418,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
     </a>
     <div class="nav-links">
       <a href="/#how-it-works">How it works</a>
-      <a href="/#features">Features</a>
-      <a href="/#results">Results</a>
       <a href="/#pricing">Pricing</a>
-      <a href="/#security">Security</a>
-      <a href="/#faq">FAQ</a>
       <a href="/glossary/" data-active>Glossary</a>
+      <div class="nav-dropdown">
+        <a href="/#solutions">Solutions ▾</a>
+        <div class="dropdown-menu">
+          <a href="/solutions/auto-bom/">Auto BOM</a>
+          <a href="/solutions/training-module/">Training Module</a>
+          <a href="/solutions/parts-component-library/">Parts &amp; Component Library</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="nav-right">
@@ -852,6 +867,17 @@ filterBtns.forEach(btn => {
 searchInput.addEventListener('input', () => {
   searchQuery = searchInput.value.toLowerCase().trim();
   applyFilters();
+});
+
+// Dynamic Mouse Tracking Spotlight
+document.addEventListener('mousemove', e => {
+  document.querySelectorAll('.card').forEach(card => {
+    if(card.style.display !== 'none') {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    }
+  });
 });
 </script>
 </body>
