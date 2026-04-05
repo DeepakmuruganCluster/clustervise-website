@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Machine Commissioning — Industrial Machine Design Glossary | ClusterVise</title>
+<meta name="description" content="Machine commissioning in industrial automation covers the sequence of electrical, mechanical, and software checks performed before a machine is handed over to the customer. Learn about FAT, SAT, loop checks, and common commissioning failures."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://clustervise.com/glossary/machine-commissioning"/>
+<meta property="og:title" content="Machine Commissioning | ClusterVise Glossary"/>
+<meta property="og:description" content="Machine commissioning in industrial automation covers the sequence of electrical, mechanical, and software checks performed before a machine is handed over to the customer. Learn about FAT, SAT, loop checks, and common commissioning failures."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://clustervise.com/glossary/machine-commissioning"/>
+<meta property="og:site_name" content="ClusterVise"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": "Machine Commissioning",
+  "description": "Machine commissioning in industrial automation covers the sequence of electrical, mechanical, and software checks performed before a machine is handed over to the customer. Learn about FAT, SAT, loop checks, and common commissioning failures.",
+  "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Industrial Machine Design Glossary",
+    "url": "https://clustervise.com/glossary"
+  },
+  "url": "https://clustervise.com/glossary/machine-commissioning"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --brand: #59E3FF; --brand-dk: #1FBEDC; --brand-lt: rgba(89,227,255,.10); --brand-border: rgba(89,227,255,.18);
+  --accent: #8FD65E; --accent-lt: rgba(143,214,94,.10); --warn: #F97316; --warn-lt: rgba(249,115,22,.09);
+  --green: #34D399; --green-lt: rgba(52,211,153,.09); --bg: #06101B; --bg-2: #0B1726; --bg-3: #132234;
+  --bg-4: #1A2E44; --text: #EAF4FF; --text-2: #AABDD3; --text-3: #6F87A1; --border: #1D324A;
+  --border-2: #2A4563; --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+  --serif: 'Inter', sans-serif; --radius: 10px; --max: 1120px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--sans); background: radial-gradient(circle at 14% 0%, rgba(89,227,255,.16), transparent 22%), radial-gradient(circle at 86% 8%, rgba(89,227,255,.08), transparent 18%), linear-gradient(180deg,#08111C 0%,#06101B 44%,#08121D 100%); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; background: linear-gradient(rgba(89,227,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(89,227,255,.03) 1px, transparent 1px); background-size: 120px 120px; mask-image: radial-gradient(circle at center, rgba(0,0,0,.7), transparent 88%); opacity: .33; }
+::selection { background: rgba(89,227,255,.22); }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: #2D465F; border-radius: 3px; }
+img { display: block; max-width: 100%; } a { color: inherit; text-decoration: none; }
+nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+.nav-left{display:flex;align-items:center;gap:28px;} .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-lockup{display:inline-flex;align-items:center;justify-content:center;height:36px;width:206px;background:transparent;border:none;border-radius:0;overflow:hidden;box-shadow:none;}
+.logo-lockup img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.015);}
+.nav-links{display:flex;gap:2px;} .nav-links a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;}
+.nav-links a:hover,.nav-links a[data-active]{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.nav-right{display:flex;align-items:center;gap:10px;} .btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .18s;text-decoration:none;border:none;}
+.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);} .btn-brand:hover{filter:brightness(.98);box-shadow:0 14px 30px rgba(31,190,220,.34);}
+.breadcrumb {max-width:var(--max);margin:0 auto;padding:18px 32px 0;display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--text-3);}
+.breadcrumb a{transition:color .15s;} .breadcrumb a:hover{color:var(--brand);} .breadcrumb .sep{color:var(--border-2);} .breadcrumb .current{color:var(--text-2);}
+.page {max-width:var(--max);margin:0 auto;padding:32px 32px 80px;display:grid;grid-template-columns:1fr 268px;gap:48px;align-items:start;}
+.art-header {margin-bottom:40px;}
+.term-chip {display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--accent);background:var(--accent-lt);border:1px solid rgba(143,214,94,.2);padding:4px 12px;border-radius:4px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px;}
+.art-header h1 {font-family:var(--sans);font-size:clamp(26px,4vw,42px);font-weight:800;letter-spacing:-.03em;line-height:1.08;color:var(--text);margin-bottom:20px;}
+.art-header h1 em {font-style:normal;background:linear-gradient(95deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.art-meta {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.meta-pill {display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--text-2);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(89,227,255,.12);padding:5px 12px;border-radius:999px;}
+.lede {font-family:var(--sans);font-size:17px;font-weight:400;color:#C6D7E8;line-height:1.82;padding:22px 24px;border:1px solid rgba(89,227,255,.14);background:linear-gradient(180deg,rgba(12,24,38,.84),rgba(7,16,27,.94));border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 16px 36px rgba(0,0,0,.22);}
+.sec-head {display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;font-weight:600;color:var(--brand);letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;}
+.sec-head::after {content:'';flex:1;height:1px;background:var(--border);}
+section {margin-bottom:44px;scroll-margin-top:80px;}
+section p {font-family:var(--serif);font-size:16px;font-weight:300;color:var(--text-2);line-height:1.82;}
+section p+p {margin-top:14px;} section p strong {font-weight:600;color:var(--text);font-family:var(--sans);font-size:14px;}
+.bullet-list {list-style:none;display:flex;flex-direction:column;gap:10px;}
+.bullet-list li {display:grid;grid-template-columns:20px 1fr;gap:8px;font-family:var(--serif);font-size:15.5px;font-weight:300;color:var(--text-2);line-height:1.75;}
+.bullet-list li::before {content:'→';color:var(--brand);font-family:var(--mono);font-size:13px;padding-top:2px;}
+.bullet-list li strong {font-weight:600;color:var(--text);font-family:var(--sans);font-size:13.5px;}
+.callout {border-radius:18px;padding:22px 22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025);}
+.callout-warn {background:linear-gradient(180deg,rgba(249,115,22,.12),rgba(249,115,22,.06));border:1px solid rgba(249,115,22,.24);}
+.callout-good {background:linear-gradient(180deg,rgba(52,211,153,.10),rgba(52,211,153,.04));border:1px solid rgba(52,211,153,.2);}
+.callout-title {font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;display:flex;align-items:center;gap:7px;}
+.callout-warn .callout-title {color:var(--warn);} .callout-good .callout-title {color:var(--green);}
+.callout-list {list-style:none;display:flex;flex-direction:column;gap:9px;}
+.callout-list li {display:grid;grid-template-columns:16px 1fr;gap:8px;font-family:var(--serif);font-size:14.5px;font-weight:300;color:var(--text-2);line-height:1.72;}
+.callout-warn .callout-list li::before {content:'⚠';font-size:11px;color:var(--warn);padding-top:2px;}
+.callout-good .callout-list li::before {content:'✓';font-size:11px;color:var(--green);font-weight:700;padding-top:2px;}
+.callout-good p {font-family:var(--serif);font-size:14.5px;font-weight:300;color:var(--text-2);line-height:1.78;}
+.workflow {display:flex;flex-direction:column;}
+.wf-step {display:grid;grid-template-columns:38px 1fr;gap:16px;position:relative;}
+.wf-track {display:flex;flex-direction:column;align-items:center;}
+.wf-num {width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid rgba(89,227,255,.14);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--brand);box-shadow:inset 0 1px 0 rgba(255,255,255,.03);flex-shrink:0;z-index:1;}
+.wf-line {flex:1;width:1px;background:var(--border);min-height:20px;margin:4px 0;}
+.wf-step:last-child .wf-line {display:none;}
+.wf-body {padding-bottom:24px;}
+.wf-title {font-family:var(--sans);font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.wf-detail {font-family:var(--serif);font-size:14px;font-weight:300;color:var(--text-3);line-height:1.68;}
+.related-grid {display:flex;flex-wrap:wrap;gap:8px;}
+.related-chip {font-family:var(--mono);font-size:12px;font-weight:500;color:var(--brand);background:var(--brand-lt);border:1px solid var(--brand-border);padding:6px 14px;border-radius:6px;transition:all .15s;}
+.related-chip:hover {background:rgba(89,227,255,.18);border-color:var(--brand);color:#fff;}
+.sidebar {position:sticky;top:76px;display:flex;flex-direction:column;gap:14px;}
+.sb-card {background:linear-gradient(180deg,rgba(10,21,34,.92),rgba(8,17,28,.98));border:1px solid rgba(89,227,255,.12);border-radius:18px;padding:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 16px 36px rgba(0,0,0,.22);}
+.sb-title {font-family:var(--mono);font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px;}
+.toc-link {display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--text-3);padding:8px 10px;border-radius:10px;transition:all .15s;border-left:2px solid transparent;margin-bottom:4px;}
+.toc-link:hover,.toc-link.active {color:var(--brand);background:rgba(89,227,255,.10);border-left-color:var(--brand);}
+.toc-num {font-family:var(--mono);font-size:10px;color:var(--text-3);opacity:.6;flex-shrink:0;width:16px;}
+.cta-card {background:linear-gradient(145deg,rgba(89,227,255,.07),rgba(143,214,94,.05));border:1px solid rgba(89,227,255,.18);border-radius:var(--radius);padding:20px;}
+.cta-card h3 {font-family:var(--sans);font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.015em;margin-bottom:8px;}
+.cta-card p {font-family:var(--serif);font-size:13px;font-weight:300;color:var(--text-3);line-height:1.65;margin-bottom:14px;}
+.cta-btn {display:block;text-align:center;font-family:var(--sans);font-size:13px;font-weight:700;padding:9px 18px;border-radius:7px;background:var(--brand);color:#032638;border:none;cursor:pointer;transition:all .18s;letter-spacing:-.01em;}
+.cta-btn:hover {background:var(--brand-dk);}
+.stat-row {display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);}
+.stat-row:last-child {border-bottom:none;} .stat-key {font-size:11.5px;color:var(--text-3);font-family:var(--sans);}
+.stat-val {font-family:var(--mono);font-size:12px;font-weight:600;color:var(--text);}
+.footer {border-top:1px solid var(--border);padding:28px 32px;max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-brand {font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text-3);}
+.footer-links {display:flex;gap:20px;} .footer-links a {font-size:12px;color:var(--text-3);transition:color .15s;} .footer-links a:hover {color:var(--brand);}
+.reveal {opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;} .reveal.in {opacity:1;transform:none;}
+@media (max-width:860px) { .page {grid-template-columns:1fr;padding:24px 20px 60px;} .sidebar {position:static;} .nav-links {display:none;} }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo"><span class="logo-lockup"><img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/></span></a>
+    <div class="nav-links">
+      <a href="/#how-it-works">How it works</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/glossary/" data-active>Glossary</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button onclick="location.href='/contact/'" class="btn btn-brand">Get in touch</button>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="/">Home</a><span class="sep">›</span>
+  <a href="/glossary/">Glossary</a><span class="sep">›</span>
+  <span class="current">Machine Commissioning</span>
+</div>
+<div class="page">
+  <article class="article">
+    <div class="art-header reveal" id="sec-top">
+      <div class="term-chip">Commissioning · FAT · SAT</div>
+      <h1>Machine Commissioning</h1>
+      <p class="lede">Machine commissioning is the structured process of verifying, testing, and proving that every system on a newly built or modified industrial machine functions correctly — electrically, mechanically, pneumatically, and in software — before production begins. Commissioning includes Factory Acceptance Testing (FAT) at the machine builder's facility and Site Acceptance Testing (SAT) after installation at the customer site. A poorly documented machine design — missing I/O lists, inconsistent BOM revisions, or absent wiring diagrams — is the single biggest cause of extended commissioning times and cost overruns.</p>
+    </div>
+    <section class="reveal" id="sec-usage">
+      <div class="sec-head">Where this is used in real machines</div>
+      <ul class="bullet-list"><li>SPM FAT at machine builder: Electrical loop checks against the I/O list, servo axis tuning, safety function validation against the safety function data sheets, and a witnessed production run at rated speed.</li><li>Conveyor system SAT: Mechanical alignment, belt tensioning, VFD ramp tuning, sensor position verification, inter-machine handshake signal testing with adjacent lines.</li><li>Packaging machine commissioning: Product trials at rated throughput, HMI screen validation, reject system verification, and production data logging setup.</li><li>Safety function validation: Each safety function (E-stop, guard door, light curtain) is individually tested and documented — response time measured, PLr verified by inspection against the safety circuit drawing.</li></ul>
+    </section>
+    <section class="reveal" id="sec-tech">
+      <div class="sec-head">Technical context</div>
+      <p>Commissioning follows a structured sequence to avoid unsafe states during testing: (1) Dead check — verify that no live voltage is present on any circuit before first power-on; check that all fuses and MCBs are rated correctly against the BOM. (2) Power-on sequence — energise the incoming supply, verify phase sequence (especially for 3-phase motors), check control transformer secondary voltages, verify 24V DC rail voltage at each SMPS output. (3) I/O loop checks — operate each field device (sensor, valve, motor starter) from a PLC forcing mode or commissioning panel, verify the correct PLC input activates, and verify the correct output reaches the field device. (4) Motion commissioning — autotune servo drives (inertia identification, speed loop, position loop), set travel limits, verify homing routines. (5) Safety function testing — test each safety function: actuate the E-stop, verify machine motion stops within the declared stopping time, verify the safety relay output de-energises, verify the PLC receives the correct safe-state signal. (6) Production trials — run the machine at reduced and then rated speed with product, verify cycle time, reject rate, and alarm handling.</p>
+    </section>
+    <section class="reveal" id="sec-mistakes">
+      <div class="sec-head">Common mistakes engineers make</div>
+      <div class="callout callout-warn">
+        <div class="callout-title">&#9888; &nbsp;Engineer Errors — What Goes Wrong</div>
+        <ul class="callout-list"><li>Starting I/O loop checks without a complete, current-revision I/O list — commissioning engineers spend hours tracing wires that the drawing says go somewhere different.</li><li>Performing safety function testing last, after the machine has been running in production mode — safety faults found at this stage can require major rewiring and delay handover by weeks.</li><li>Not recording servo drive tuning parameters during FAT — at SAT, the drives are often re-initialised and the tuning is lost, requiring the process to be repeated on-site.</li><li>Accepting FAT with known open items without a formal punch list and closure date — open items become permanent and are discovered again by the end customer during production.</li><li>Not verifying incoming power quality (voltage, frequency, harmonic distortion) at the SAT site before energising — site supply issues (voltage sags, high THD from other equipment) cause equipment faults that are incorrectly attributed to machine design.</li></ul>
+      </div>
+    </section>
+    <section class="reveal" id="sec-manual">
+      <div class="sec-head">How engineers currently solve this</div>
+      <div class="workflow">
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">1</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Prepare commissioning documentation</div>
+        <div class="wf-detail">Assemble I/O list, wiring diagrams, BOM, safety function data sheets, and servo parameter sheets. Verify all are at the same revision as the built machine.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">2</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Dead check and power-on</div>
+        <div class="wf-detail">Verify de-energised state, check protection device ratings, sequence power-on from incoming supply through to 24V DC rails.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">3</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">I/O loop checks</div>
+        <div class="wf-detail">Systematically test every I/O point against the I/O list. Mark each point as pass/fail. Typical rate: 30–60 I/O points per engineer per day.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">4</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Motion commissioning</div>
+        <div class="wf-detail">Autotune each servo axis, set limits, verify homing. Record all drive parameter sets.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">5</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Safety function testing</div>
+        <div class="wf-detail">Test and document each safety function. Measure stopping times. Sign off against safety function data sheets.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">6</div>
+        
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Production trials and FAT signoff</div>
+        <div class="wf-detail">Run product at rated throughput. Witness test with customer. Agree punch list for any open items. Issue FAT certificate.</div>
+      </div>
+    </div></div>
+    </section>
+    <section class="reveal" id="sec-cv">
+      <div class="sec-head">How ClusterVise improves this</div>
+      <div class="callout callout-good">
+        <div class="callout-title">&#10003; &nbsp;ClusterVise — What Changes</div>
+        <p>ClusterVise produces the structured I/O list, BOM, and design documentation package that commissioning engineers need before they arrive on-site. The I/O list generated by ClusterVise includes PLC addresses, terminal numbers, cable numbers, and device descriptions — formatted as a commissioning-ready loop check sheet rather than a raw data dump. When the design documentation is complete before panel build begins, FAT loop check cycles on complex SPMs typically run 30–40% faster than on machines where documentation is assembled during commissioning.</p>
+      </div>
+    </section>
+    <section class="reveal" id="sec-related">
+      <div class="sec-head">Related terms</div>
+      <div class="related-grid"><a href="design-documentation.html" class="related-chip">Machine Design Documentation</a><a href="plc-io-sizing.html" class="related-chip">PLC I/O Sizing</a><a href="safety-io-architecture.html" class="related-chip">Safety I/O Architecture</a><a href="functional-safety.html" class="related-chip">Functional Safety</a><a href="bill-of-materials.html" class="related-chip">Bill of Materials</a></div>
+    </section>
+  </article>
+  <aside class="sidebar">
+    <div class="sb-card">
+      <div class="sb-title">On this page</div>
+      <a href="#sec-top"      class="toc-link active"><span class="toc-num">01</span>Definition</a>
+      <a href="#sec-usage"    class="toc-link"><span class="toc-num">02</span>Where it's used</a>
+      <a href="#sec-tech"     class="toc-link"><span class="toc-num">03</span>Technical context</a>
+      <a href="#sec-mistakes" class="toc-link"><span class="toc-num">04</span>Common mistakes</a>
+      <a href="#sec-manual"   class="toc-link"><span class="toc-num">05</span>Manual workflow</a>
+      <a href="#sec-cv"       class="toc-link"><span class="toc-num">06</span>ClusterVise approach</a>
+      <a href="#sec-related"  class="toc-link"><span class="toc-num">07</span>Related terms</a>
+    </div>
+    <div class="cta-card">
+      <h3>Arrive at FAT with complete commissioning documentation</h3>
+      <p>ClusterVise generates the I/O list, loop check sheets, and design package from your machine spec — so your commissioning team starts from structured data, not a blank sheet.</p>
+      <a href="/" class="cta-btn">Request a Pilot</a>
+    </div>
+    <div class="sb-card">
+      <div class="sb-title">Platform stats</div>
+      <div class="stat-row"><span class="stat-key">Loop check speed</span><span class="stat-val">↑ 30–40%</span></div>
+      <div class="stat-row"><span class="stat-key">I/O list format</span><span class="stat-val">Commission-ready</span></div>
+      <div class="stat-row"><span class="stat-key">Export formats</span><span class="stat-val">XLS · PDF · CSV</span></div>
+      <div class="stat-row"><span class="stat-key">Design cycle</span><span class="stat-val">↓ 65%</span></div>
+    </div>
+  </aside>
+</div>
+<div class="footer">
+  <a href="/" class="nav-logo footer-brand"><span class="logo-lockup"><img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/></span></a>
+  <div class="footer-links">
+    <a href="/glossary/">All Terms</a>
+    <a href="/">Platform</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</div>
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 60); ro.unobserve(e.target); } });
+}, { threshold: 0.08 });
+reveals.forEach(el => ro.observe(el));
+const sections = document.querySelectorAll('section[id], div[id^="sec-"]');
+const tocLinks = document.querySelectorAll('.toc-link');
+const tocObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) { const id = entry.target.id; tocLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + id); }); } });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => tocObs.observe(s));
+</script>
+</body>
+</html>

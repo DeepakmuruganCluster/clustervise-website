@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Functional Safety — Industrial Machine Design Glossary | ClusterVise</title>
+<meta name="description" content="Functional safety in industrial machine design covers the engineering discipline of designing safety functions that achieve a defined Performance Level (PLr) or Safety Integrity Level (SIL). Learn how ISO 13849 and IEC 62061 apply to SPM design."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://clustervise.com/glossary/functional-safety"/>
+<meta property="og:title" content="Functional Safety | ClusterVise Glossary"/>
+<meta property="og:description" content="Functional safety in industrial machine design covers the engineering discipline of designing safety functions that achieve a defined Performance Level (PLr) or Safety Integrity Level (SIL). Learn how ISO 13849 and IEC 62061 apply to SPM design."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://clustervise.com/glossary/functional-safety"/>
+<meta property="og:site_name" content="ClusterVise"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": "Functional Safety",
+  "description": "Functional safety in industrial machine design covers the engineering discipline of designing safety functions that achieve a defined Performance Level (PLr) or Safety Integrity Level (SIL). Learn how ISO 13849 and IEC 62061 apply to SPM design.",
+  "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Industrial Machine Design Glossary",
+    "url": "https://clustervise.com/glossary"
+  },
+  "url": "https://clustervise.com/glossary/functional-safety"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --brand: #59E3FF; --brand-dk: #1FBEDC; --brand-lt: rgba(89,227,255,.10); --brand-border: rgba(89,227,255,.18);
+  --accent: #8FD65E; --accent-lt: rgba(143,214,94,.10); --warn: #F97316; --warn-lt: rgba(249,115,22,.09);
+  --green: #34D399; --green-lt: rgba(52,211,153,.09); --bg: #06101B; --bg-2: #0B1726; --bg-3: #132234;
+  --bg-4: #1A2E44; --text: #EAF4FF; --text-2: #AABDD3; --text-3: #6F87A1; --border: #1D324A;
+  --border-2: #2A4563; --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+  --serif: 'Inter', sans-serif; --radius: 10px; --max: 1120px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--sans); background: radial-gradient(circle at 14% 0%, rgba(89,227,255,.16), transparent 22%), radial-gradient(circle at 86% 8%, rgba(89,227,255,.08), transparent 18%), linear-gradient(180deg,#08111C 0%,#06101B 44%,#08121D 100%); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; background: linear-gradient(rgba(89,227,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(89,227,255,.03) 1px, transparent 1px); background-size: 120px 120px; mask-image: radial-gradient(circle at center, rgba(0,0,0,.7), transparent 88%); opacity: .33; }
+::selection { background: rgba(89,227,255,.22); }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: #2D465F; border-radius: 3px; }
+img { display: block; max-width: 100%; } a { color: inherit; text-decoration: none; }
+nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(89,227,255,.16);height:62px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 32px rgba(0,0,0,.26);}
+.nav-left{display:flex;align-items:center;gap:28px;} .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-lockup{display:inline-flex;align-items:center;justify-content:center;height:36px;width:206px;background:transparent;border:none;border-radius:0;overflow:hidden;box-shadow:none;}
+.logo-lockup img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.015);}
+.nav-links{display:flex;gap:2px;} .nav-links a{font-size:13px;font-weight:600;color:#9CB1C8;text-decoration:none;padding:7px 13px;border-radius:7px;transition:all .15s;letter-spacing:.01em;}
+.nav-links a:hover,.nav-links a[data-active]{color:#F4FAFF;background:rgba(89,227,255,.10);}
+.nav-right{display:flex;align-items:center;gap:10px;} .btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .18s;text-decoration:none;border:none;}
+.btn-brand{background:linear-gradient(90deg,#6FEAFF 0%,#59E3FF 60%,#39C9EA 100%);color:#032638;box-shadow:0 10px 28px rgba(31,190,220,.24);} .btn-brand:hover{filter:brightness(.98);box-shadow:0 14px 30px rgba(31,190,220,.34);}
+.breadcrumb {max-width:var(--max);margin:0 auto;padding:18px 32px 0;display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--text-3);}
+.breadcrumb a{transition:color .15s;} .breadcrumb a:hover{color:var(--brand);} .breadcrumb .sep{color:var(--border-2);} .breadcrumb .current{color:var(--text-2);}
+.page {max-width:var(--max);margin:0 auto;padding:32px 32px 80px;display:grid;grid-template-columns:1fr 268px;gap:48px;align-items:start;}
+.art-header {margin-bottom:40px;}
+.term-chip {display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--accent);background:var(--accent-lt);border:1px solid rgba(143,214,94,.2);padding:4px 12px;border-radius:4px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px;}
+.art-header h1 {font-family:var(--sans);font-size:clamp(26px,4vw,42px);font-weight:800;letter-spacing:-.03em;line-height:1.08;color:var(--text);margin-bottom:20px;}
+.art-header h1 em {font-style:normal;background:linear-gradient(95deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.art-meta {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.meta-pill {display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--text-2);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(89,227,255,.12);padding:5px 12px;border-radius:999px;}
+.lede {font-family:var(--sans);font-size:17px;font-weight:400;color:#C6D7E8;line-height:1.82;padding:22px 24px;border:1px solid rgba(89,227,255,.14);background:linear-gradient(180deg,rgba(12,24,38,.84),rgba(7,16,27,.94));border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 16px 36px rgba(0,0,0,.22);}
+.sec-head {display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;font-weight:600;color:var(--brand);letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;}
+.sec-head::after {content:'';flex:1;height:1px;background:var(--border);}
+section {margin-bottom:44px;scroll-margin-top:80px;}
+section p {font-family:var(--serif);font-size:16px;font-weight:300;color:var(--text-2);line-height:1.82;}
+section p+p {margin-top:14px;} section p strong {font-weight:600;color:var(--text);font-family:var(--sans);font-size:14px;}
+.bullet-list {list-style:none;display:flex;flex-direction:column;gap:10px;}
+.bullet-list li {display:grid;grid-template-columns:20px 1fr;gap:8px;font-family:var(--serif);font-size:15.5px;font-weight:300;color:var(--text-2);line-height:1.75;}
+.bullet-list li::before {content:'→';color:var(--brand);font-family:var(--mono);font-size:13px;padding-top:2px;}
+.bullet-list li strong {font-weight:600;color:var(--text);font-family:var(--sans);font-size:13.5px;}
+.callout {border-radius:18px;padding:22px 22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025);}
+.callout-warn {background:linear-gradient(180deg,rgba(249,115,22,.12),rgba(249,115,22,.06));border:1px solid rgba(249,115,22,.24);}
+.callout-good {background:linear-gradient(180deg,rgba(52,211,153,.10),rgba(52,211,153,.04));border:1px solid rgba(52,211,153,.2);}
+.callout-title {font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;display:flex;align-items:center;gap:7px;}
+.callout-warn .callout-title {color:var(--warn);} .callout-good .callout-title {color:var(--green);}
+.callout-list {list-style:none;display:flex;flex-direction:column;gap:9px;}
+.callout-list li {display:grid;grid-template-columns:16px 1fr;gap:8px;font-family:var(--serif);font-size:14.5px;font-weight:300;color:var(--text-2);line-height:1.72;}
+.callout-warn .callout-list li::before {content:'⚠';font-size:11px;color:var(--warn);padding-top:2px;}
+.callout-good .callout-list li::before {content:'✓';font-size:11px;color:var(--green);font-weight:700;padding-top:2px;}
+.callout-good p {font-family:var(--serif);font-size:14.5px;font-weight:300;color:var(--text-2);line-height:1.78;}
+.workflow {display:flex;flex-direction:column;}
+.wf-step {display:grid;grid-template-columns:38px 1fr;gap:16px;position:relative;}
+.wf-track {display:flex;flex-direction:column;align-items:center;}
+.wf-num {width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid rgba(89,227,255,.14);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--brand);box-shadow:inset 0 1px 0 rgba(255,255,255,.03);flex-shrink:0;z-index:1;}
+.wf-line {flex:1;width:1px;background:var(--border);min-height:20px;margin:4px 0;}
+.wf-step:last-child .wf-line {display:none;}
+.wf-body {padding-bottom:24px;}
+.wf-title {font-family:var(--sans);font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.wf-detail {font-family:var(--serif);font-size:14px;font-weight:300;color:var(--text-3);line-height:1.68;}
+.related-grid {display:flex;flex-wrap:wrap;gap:8px;}
+.related-chip {font-family:var(--mono);font-size:12px;font-weight:500;color:var(--brand);background:var(--brand-lt);border:1px solid var(--brand-border);padding:6px 14px;border-radius:6px;transition:all .15s;}
+.related-chip:hover {background:rgba(89,227,255,.18);border-color:var(--brand);color:#fff;}
+.sidebar {position:sticky;top:76px;display:flex;flex-direction:column;gap:14px;}
+.sb-card {background:linear-gradient(180deg,rgba(10,21,34,.92),rgba(8,17,28,.98));border:1px solid rgba(89,227,255,.12);border-radius:18px;padding:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 16px 36px rgba(0,0,0,.22);}
+.sb-title {font-family:var(--mono);font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px;}
+.toc-link {display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--text-3);padding:8px 10px;border-radius:10px;transition:all .15s;border-left:2px solid transparent;margin-bottom:4px;}
+.toc-link:hover,.toc-link.active {color:var(--brand);background:rgba(89,227,255,.10);border-left-color:var(--brand);}
+.toc-num {font-family:var(--mono);font-size:10px;color:var(--text-3);opacity:.6;flex-shrink:0;width:16px;}
+.cta-card {background:linear-gradient(145deg,rgba(89,227,255,.07),rgba(143,214,94,.05));border:1px solid rgba(89,227,255,.18);border-radius:var(--radius);padding:20px;}
+.cta-card h3 {font-family:var(--sans);font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.015em;margin-bottom:8px;}
+.cta-card p {font-family:var(--serif);font-size:13px;font-weight:300;color:var(--text-3);line-height:1.65;margin-bottom:14px;}
+.cta-btn {display:block;text-align:center;font-family:var(--sans);font-size:13px;font-weight:700;padding:9px 18px;border-radius:7px;background:var(--brand);color:#032638;border:none;cursor:pointer;transition:all .18s;letter-spacing:-.01em;}
+.cta-btn:hover {background:var(--brand-dk);}
+.stat-row {display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);}
+.stat-row:last-child {border-bottom:none;} .stat-key {font-size:11.5px;color:var(--text-3);font-family:var(--sans);}
+.stat-val {font-family:var(--mono);font-size:12px;font-weight:600;color:var(--text);}
+.footer {border-top:1px solid var(--border);padding:28px 32px;max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-brand {font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text-3);}
+.footer-links {display:flex;gap:20px;} .footer-links a {font-size:12px;color:var(--text-3);transition:color .15s;} .footer-links a:hover {color:var(--brand);}
+.reveal {opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;} .reveal.in {opacity:1;transform:none;}
+@media (max-width:860px) { .page {grid-template-columns:1fr;padding:24px 20px 60px;} .sidebar {position:static;} .nav-links {display:none;} }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo"><span class="logo-lockup"><img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/></span></a>
+    <div class="nav-links">
+      <a href="/#how-it-works">How it works</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/glossary/" data-active>Glossary</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button onclick="location.href='/contact/'" class="btn btn-brand">Get in touch</button>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="/">Home</a><span class="sep">›</span>
+  <a href="/glossary/">Glossary</a><span class="sep">›</span>
+  <span class="current">Functional Safety</span>
+</div>
+<div class="page">
+  <article class="article">
+    <div class="art-header reveal" id="sec-top">
+      <div class="term-chip">Safety · ISO 13849 / IEC 62061</div>
+      <h1>Functional Safety</h1>
+      <p class="lede">Functional safety in industrial machine design is the engineering discipline of designing, verifying, and documenting safety-related control functions that bring a machine to a safe state when a hazard is detected — and of demonstrating that those functions achieve the required reliability level. In the EU, functional safety implementation is mandatory under the Machine Directive (2006/42/EC) and is assessed against ISO 13849-1 (Performance Level, PLa–PLe) or IEC 62061 (Safety Integrity Level, SIL 1–3). A missing or incorrectly implemented safety function is the most common reason a CE technical file is rejected.</p>
+    </div>
+    <section class="reveal" id="sec-usage">
+      <div class="sec-head">Where this is used in real machines</div>
+      <ul class="bullet-list"><li>E-stop circuits on SPMs: The emergency stop function must be designed to at least PLc (ISO 13849) for most industrial machines, requiring a safety relay or safety PLC with monitored input channels.</li><li>Guard door interlocking: Interlocked guard doors on machining and assembly SPMs require a safety function that prevents machine motion when the door is open — typically PLd or PLe depending on the severity and frequency of exposure.</li><li>Two-hand control devices: Press and forming machines use two-hand control as a safeguarding measure — the control circuit must be ISO 13851-compliant and achieve at least PLc.</li><li>Light curtains and safety mats: Area access detection for collaborative zones on assembly lines — safety function design must account for the stopping time of the hazardous motion and the detection zone position (safety distance per ISO 13855).</li></ul>
+    </section>
+    <section class="reveal" id="sec-tech">
+      <div class="sec-head">Technical context</div>
+      <p>ISO 13849-1 determines Performance Level (PL) from three parameters: Category (the structural architecture of the safety circuit — Cat B, 1, 2, 3, or 4), MTTFd (Mean Time To dangerous Failure of each channel, from component datasheets), and DCavg (Diagnostic Coverage — the fraction of dangerous failures detected by automatic diagnostics). The combination of Category + MTTFd + DCavg maps to a PL (a through e). The required PLr is determined from the risk assessment: severity (S1 = reversible, S2 = irreversible), frequency of exposure (F1 = seldom, F2 = frequent), and possibility of avoidance (P1 = possible, P2 = not possible). The calculated PL must meet or exceed PLr. IEC 62061 uses a similar method expressed in failure rate (PFHd) mapped to SIL levels.</p>
+    </section>
+    <section class="reveal" id="sec-mistakes">
+      <div class="sec-head">Common mistakes engineers make</div>
+      <div class="callout callout-warn">
+        <div class="callout-title">&#9888; &nbsp;Engineer Errors — What Goes Wrong</div>
+        <ul class="callout-list"><li>Specifying a single-channel E-stop circuit (Cat 1) when the risk assessment demands PLd — Cat 1 cannot achieve PLd because it has no diagnostic capability to detect stuck contacts.</li><li>Using a standard PLC for safety functions without a separate safety-rated watchdog or safety PLC — standard PLCs are not architecturally suitable for Cat 3 or Cat 4 safety circuits.</li><li>Calculating PL using component MTTFd values without verifying that the values apply to the specific failure modes relevant to the safety function.</li><li>Designing the safety function correctly but failing to document it — an undocumented safety function cannot be validated, which means the CE technical file is incomplete regardless of whether the hardware is correct.</li><li>Assuming that fitting a CE-marked safety relay automatically achieves the required PL — the PL depends on how the safety relay is wired and integrated, not just what it is.</li></ul>
+      </div>
+    </section>
+    <section class="reveal" id="sec-manual">
+      <div class="sec-head">How engineers currently solve this</div>
+      <div class="workflow">
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">1</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Conduct risk assessment</div>
+        <div class="wf-detail">Identify all hazards, assess severity, frequency, and avoidance possibility. Determine PLr for each safety function per ISO 13849-1 Annex A.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">2</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Define safety functions</div>
+        <div class="wf-detail">Write a safety function specification: what triggers it, what the safe state is, which actuators it controls, and what the response time must be.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">3</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Select safety architecture and components</div>
+        <div class="wf-detail">Choose Category (B, 1, 2, 3, or 4), select safety relay or safety PLC, specify input devices (E-stop, light curtain, safety mat). Verify MTTFd from datasheets.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">4</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Calculate PL achieved</div>
+        <div class="wf-detail">Use SISTEMA software (free, BIA/IFA) or manual calculation per ISO 13849-1 to compute PL from Category + MTTFd + DCavg. Verify PL >= PLr.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">5</div>
+        <div class="wf-line"></div>
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Design and document the safety circuit</div>
+        <div class="wf-detail">Draw the safety circuit in the electrical schematic. Document the calculation, architecture diagram, and component list in the safety function data sheet.</div>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-track">
+        <div class="wf-num">6</div>
+        
+      </div>
+      <div class="wf-body">
+        <div class="wf-title">Validation and CE documentation</div>
+        <div class="wf-detail">Validate each safety function by functional testing. Include safety function data sheets in the CE technical file.</div>
+      </div>
+    </div></div>
+    </section>
+    <section class="reveal" id="sec-cv">
+      <div class="sec-head">How ClusterVise improves this</div>
+      <div class="callout callout-good">
+        <div class="callout-title">&#10003; &nbsp;ClusterVise — What Changes</div>
+        <p>ClusterVise generates the safety I/O architecture from the declared safety functions and PLr targets — selecting appropriate safety relay types, specifying dual-channel input wiring, and flagging incompatible architectures before detailed design begins. The safety I/O list is generated alongside the standard I/O list, with PLC safety module sizing included in the BOM. Design documentation outputs include a safety function register that forms the starting point for the ISO 13849 technical file.</p>
+      </div>
+    </section>
+    <section class="reveal" id="sec-related">
+      <div class="sec-head">Related terms</div>
+      <div class="related-grid"><a href="safety-io-architecture.html" class="related-chip">Safety I/O Architecture</a><a href="risk-assessment.html" class="related-chip">Risk Assessment</a><a href="machine-guarding.html" class="related-chip">Machine Guarding</a><a href="ce-marking-machine-directive.html" class="related-chip">CE Marking & Machine Directive</a><a href="plc-io-sizing.html" class="related-chip">PLC I/O Sizing</a></div>
+    </section>
+  </article>
+  <aside class="sidebar">
+    <div class="sb-card">
+      <div class="sb-title">On this page</div>
+      <a href="#sec-top"      class="toc-link active"><span class="toc-num">01</span>Definition</a>
+      <a href="#sec-usage"    class="toc-link"><span class="toc-num">02</span>Where it's used</a>
+      <a href="#sec-tech"     class="toc-link"><span class="toc-num">03</span>Technical context</a>
+      <a href="#sec-mistakes" class="toc-link"><span class="toc-num">04</span>Common mistakes</a>
+      <a href="#sec-manual"   class="toc-link"><span class="toc-num">05</span>Manual workflow</a>
+      <a href="#sec-cv"       class="toc-link"><span class="toc-num">06</span>ClusterVise approach</a>
+      <a href="#sec-related"  class="toc-link"><span class="toc-num">07</span>Related terms</a>
+    </div>
+    <div class="cta-card">
+      <h3>Get your safety I/O list generated with PLr mapping</h3>
+      <p>ClusterVise generates safety I/O architecture, module sizing, and a safety function register from your risk assessment inputs — ready for ISO 13849 documentation.</p>
+      <a href="/" class="cta-btn">Request a Pilot</a>
+    </div>
+    <div class="sb-card">
+      <div class="sb-title">Platform stats</div>
+      <div class="stat-row"><span class="stat-key">Safety functions</span><span class="stat-val">Auto-registered</span></div>
+      <div class="stat-row"><span class="stat-key">I/O list output</span><span class="stat-val">With PLr mapping</span></div>
+      <div class="stat-row"><span class="stat-key">Standards</span><span class="stat-val">ISO 13849 · IEC 62061</span></div>
+      <div class="stat-row"><span class="stat-key">Design cycle</span><span class="stat-val">↓ 65%</span></div>
+    </div>
+  </aside>
+</div>
+<div class="footer">
+  <a href="/" class="nav-logo footer-brand"><span class="logo-lockup"><img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/></span></a>
+  <div class="footer-links">
+    <a href="/glossary/">All Terms</a>
+    <a href="/">Platform</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</div>
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 60); ro.unobserve(e.target); } });
+}, { threshold: 0.08 });
+reveals.forEach(el => ro.observe(el));
+const sections = document.querySelectorAll('section[id], div[id^="sec-"]');
+const tocLinks = document.querySelectorAll('.toc-link');
+const tocObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) { const id = entry.target.id; tocLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + id); }); } });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => tocObs.observe(s));
+</script>
+</body>
+</html>
