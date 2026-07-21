@@ -574,7 +574,7 @@ html[data-theme="light"] :is(a,button,input,select,textarea,summary,[tabindex]):
   }
 
   function init() {
-    var theme = getStoredTheme() || 'dark';
+    var theme = getStoredTheme() || 'light';
     injectStyles();
     root.setAttribute('data-theme', theme);
     swapLogos(theme);
