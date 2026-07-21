@@ -11,7 +11,9 @@
       "Bash(python3 -c ' *)",
       "Bash(pip3 install *)",
       "Bash(convert assets/eci-logo.png -format \"%[pixel:p{2,2}]\" info:)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git status *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
