@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- AI crawler entry point -->
+  <url>
+    <loc>https://clustervise.com/llms.txt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Core pages -->
   <url>
     <loc>https://clustervise.com/</loc>
@@ -208,6 +215,56 @@
   </url>
   <url>
     <loc>https://clustervise.com/glossary/emergency-stop-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/enclosure-ip-rating-selection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/terminal-block-selection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/panel-wiring-standards-iec-60204-1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/wire-numbering-and-labeling</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/fuse-selection-and-coordination</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/surge-protection-device-selection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/control-relay-selection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/control-transformer-sizing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/cable-gland-and-entry-selection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clustervise.com/glossary/wire-duct-and-trunking-sizing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

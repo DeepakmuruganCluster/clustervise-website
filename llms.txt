@@ -1,0 +1,40 @@
+# ClusterVise
+
+> ClusterVise is an AI-powered engineering platform for industrial automation and special purpose machine (SPM) design teams, based in Leuven, Belgium.
+
+## What ClusterVise Does
+
+ClusterVise automates the most time-consuming parts of industrial machine design. Engineers describe a machine in plain language, and ClusterVise generates the full engineering package: a validated bill of materials (BOM), stationwise I/O lists, component selections, single line diagrams, and project documentation — in under 10 minutes.
+
+Tasks that previously took 17+ hours of manual work are reduced by up to 98%.
+
+## Products
+
+- **Auto BOM**: Generates a complete, validated bill of materials for special purpose machines from a machine description. Includes stationwise structure, I/O lists, single line diagrams, live component pricing, and design documentation.
+- **Parts & Component Library**: A curated, supplier-aware library of industrial components for automation engineers. Supports consistent selection across projects.
+- **Training Module**: Structured learning content for industrial automation engineering teams.
+
+## Who It's For
+
+Industrial automation engineers, electrical design engineers, and SPM (special purpose machine) engineering teams at machine builders, system integrators, and automotive/manufacturing companies.
+
+## Key Facts
+
+- Headquartered in Leuven, Belgium
+- Reduces BOM generation time from ~17 hours to under 10 minutes
+- Supplier-aware device selection built in
+- Covers: PLC I/O sizing, actuator selection, motor selection, VFD selection, cable sizing, panel layout, safety architecture, fieldbus selection, HMI selection, and more
+- Contact: info@clustervise.com
+
+## Glossary
+
+ClusterVise maintains a technical glossary of industrial automation engineering terms at https://clustervise.com/glossary/ covering topics including BOM generation, PLC I/O sizing, motor protection, servo drive selection, functional safety, and 30+ other SPM design topics.
+
+## Links
+
+- Homepage: https://clustervise.com
+- Auto BOM: https://clustervise.com/solutions/auto-bom/
+- Parts Library: https://clustervise.com/solutions/parts-component-library/
+- Training: https://clustervise.com/solutions/training-module/
+- Glossary: https://clustervise.com/glossary/
+- Contact: https://clustervise.com/contact/

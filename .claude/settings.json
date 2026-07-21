@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m http.server 3000)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(node --check \"/Users/deepak/Documents/ClusterVise website/theme-toggle.js\")",
+      "Bash(identify \"/Users/deepak/Documents/ClusterVise website/assets/Clustervise_Logo.png\")",
+      "Bash(node --check \"/Users/deepak/Documents/ClusterVise website/design-system.js\")",
+      "Bash(grep -n \"cv-theme-toggle\\\\|backtick\\\\|\\\\`;\" \"/Users/deepak/Documents/ClusterVise website/theme-toggle.js\")",
+      "Bash(node --check theme-toggle.js)",
+      "Bash(python3 -c ' *)",
+      "Bash(pip3 install *)",
+      "Bash(convert assets/eci-logo.png -format \"%[pixel:p{2,2}]\" info:)",
+      "Bash(git add *)"
+    ]
+  }
+}

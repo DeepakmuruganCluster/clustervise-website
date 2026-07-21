@@ -380,16 +380,30 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
 .no-results p { font-family: var(--sans); font-size: 16px; color: var(--text-3); }
 
 /* FOOTER */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 28px 40px;
-  max-width: var(--max); margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+footer {
+  background: linear-gradient(180deg,rgba(8,18,30,.92),rgba(7,16,27,.98));
+  border-top: 1px solid rgba(89,227,255,.12);
+  padding: 52px 40px 32px;
 }
-.footer-brand { font-size: 13px; font-weight: 700; color: var(--text-3); }
-.footer-links { display: flex; gap: 20px; }
-.footer-links a { font-size: 12px; color: var(--text-3); transition: color .15s; }
-.footer-links a:hover { color: var(--brand); }
+.footer-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: grid; grid-template-columns: 1.4fr auto auto auto auto; gap: 44px;
+  align-items: start;
+}
+.footer-brand p { font-size: 13px; color: var(--text-3); margin-top: 10px; line-height: 1.65; max-width: 260px; }
+.footer-address { margin-top: 14px; font-size: 12px; color: var(--text-3); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 14px; }
+.footer-col h4 { font-size: 11.5px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+.footer-col a { display: block; font-size: 13.5px; color: var(--text-2); text-decoration: none; margin-bottom: 9px; transition: color .15s; }
+.footer-col a:hover { color: var(--brand); }
+.footer-bottom {
+  max-width: var(--max); margin: 28px auto 0; padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--text-3); flex-wrap: wrap; gap: 8px;
+}
+@media (max-width: 640px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+}
 
 /* REVEAL */
 .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
@@ -402,7 +416,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
   .hero-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
   .filter-row { padding: 14px; gap: 8px; }
   .filter-btn { font-size: 11.5px; padding: 6px 12px; }
-  .nav-inner, .breadcrumb, .hero, .filter-wrap, .grid-wrap, .footer { padding-left: 20px; padding-right: 20px; }
+  .nav-inner, .breadcrumb, .hero, .filter-wrap, .grid-wrap, footer { padding-left: 20px; padding-right: 20px; }
   .filter-wrap { padding-top: 30px; }
 }
 /* MODAL */
@@ -429,8 +443,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
 .social-icons a{color:var(--text-3);transition:color .15s;display:flex;align-items:center;}
 .social-icons a:hover{color:var(--brand);}
 </style>
+<script src="/theme-toggle.js"></script>
 </head>
-<body>
+<body id="glossary-index">
 
 <!-- NAV -->
 <nav>
@@ -514,7 +529,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
 
 <!-- CARDS GRID -->
 <div class="grid-wrap">
-  <div class="grid-count">Showing <span id="count">25</span> of 25 terms</div>
+  <div class="grid-count">Showing <span id="count">0</span> of <span id="total-count">0</span> terms</div>
   <div class="card-grid" id="grid">
 
     <!-- Cards are rendered below - one per term -->
@@ -814,6 +829,76 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
       <div class="card-footer"><span class="card-arrow">Read more →</span></div>
     </a>
 
+    <a href="enclosure-ip-rating-selection.html" class="card" data-cat="documentation" data-title="enclosure ip rating selection nema ip65 ip66 ip69k panel washdown ingress protection">
+      <div class="card-cat">Panel Design</div>
+      <div class="card-title">Enclosure IP Rating Selection</div>
+      <p class="card-desc">Matching a control panel or field enclosure's ingress protection class to the dust, moisture, and washdown exposure it will actually face on the plant floor.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="terminal-block-selection.html" class="card" data-cat="documentation" data-title="terminal block selection screw spring cage clamp fused disconnect din rail">
+      <div class="card-cat">Panel Design</div>
+      <div class="card-title">Terminal Block Selection</div>
+      <p class="card-desc">Choosing connection type, current rating, and function — feed-through, fused, disconnect, ground — for the terminal blocks that join field and panel wiring.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="panel-wiring-standards-iec-60204-1.html" class="card" data-cat="documentation" data-title="panel wiring standards iec 60204-1 conductor color pe bonding ce marking">
+      <div class="card-cat">Design Documentation</div>
+      <div class="card-title">Panel Wiring Standards (IEC 60204-1)</div>
+      <p class="card-desc">Conductor color codes, minimum wire sizing, and protective bonding rules from IEC 60204-1 that make a control panel compliant, safe, and CE-markable.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="wire-numbering-and-labeling.html" class="card" data-cat="documentation" data-title="wire numbering labeling ferrule scheme schematic cross reference traceability">
+      <div class="card-cat">Design Documentation</div>
+      <div class="card-title">Wire Numbering and Labeling</div>
+      <p class="card-desc">The identification scheme that ties every conductor in a panel to its exact position on the electrical schematic — the biggest factor in commissioning speed.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="fuse-selection-and-coordination.html" class="card" data-cat="power" data-title="fuse selection coordination semiconductor fuse selectivity let-through i2t vfd protection">
+      <div class="card-cat">Power &amp; Drives</div>
+      <div class="card-title">Fuse Selection and Coordination</div>
+      <p class="card-desc">Choosing the right fuse class and rating per circuit, then verifying upstream and downstream devices clear faults selectively instead of tripping the whole panel.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="surge-protection-device-selection.html" class="card" data-cat="power" data-title="surge protection device spd selection type 1 2 3 voltage protection level lightning transient">
+      <div class="card-cat">Power &amp; Drives</div>
+      <div class="card-title">Surge Protection Device (SPD) Selection</div>
+      <p class="card-desc">Choosing SPD class, voltage protection level, and installation point to shield PLCs, drives, and field electronics from lightning and switching transients.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="control-relay-selection.html" class="card" data-cat="control" data-title="control relay selection interposing ice cube relay coil voltage contact rating">
+      <div class="card-cat">Control &amp; PLC</div>
+      <div class="card-title">Control Relay Selection</div>
+      <p class="card-desc">Choosing interposing relay coil voltage, contact configuration, and rating to isolate PLC outputs from field loads or bridge different voltage domains.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="control-transformer-sizing.html" class="card" data-cat="power" data-title="control transformer sizing va load inrush 24v dc 110v ac step down">
+      <div class="card-cat">Power &amp; Drives</div>
+      <div class="card-title">Control Transformer Sizing</div>
+      <p class="card-desc">Calculating steady-state and inrush VA load to size the step-down transformer supplying a machine's 110V AC or 24V DC control circuit correctly.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="cable-gland-and-entry-selection.html" class="card" data-cat="documentation" data-title="cable gland entry selection ip rating strain relief emc shielded 360 degree">
+      <div class="card-cat">Panel Design</div>
+      <div class="card-title">Cable Gland and Entry Selection</div>
+      <p class="card-desc">Choosing gland type, size, and sealing method for every cable entry so an enclosure's IP rating and EMC shielding aren't quietly compromised at the gland plate.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
+    <a href="wire-duct-and-trunking-sizing.html" class="card" data-cat="documentation" data-title="wire duct trunking sizing fill ratio wireway panel routing">
+      <div class="card-cat">Panel Design</div>
+      <div class="card-title">Wire Duct and Trunking Sizing</div>
+      <p class="card-desc">Calculating the fill ratio for panel wireway so internal wiring stays accessible, cool, and has room for the additions that always come during commissioning.</p>
+      <div class="card-footer"><span class="card-arrow">Read more →</span></div>
+    </a>
+
     <!-- NO RESULTS placeholder -->
     <div class="no-results" id="no-results">
       <p>No terms match that filter. Try a different category or search term.</p>
@@ -823,23 +908,59 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,18,30,.86);backdrop-filt
 </div>
 
 <!-- FOOTER -->
-<div class="footer">
-  <a href="/" class="nav-logo footer-brand">
-    <span class="logo-lockup">
-      <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
-    </span>
-  </a>
-  <div class="footer-links">
-    <a href="/">Platform</a>
-    <a href="/">Request Demo</a>
-    <a href="/">Privacy</a>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo" style="text-decoration:none;">
+        <span class="logo-lockup">
+          <img src="../assets/ClusterVise_Logo_white.svg" alt="ClusterVise logo"/>
+        </span>
+      </a>
+      <p>Engineering intelligence for special purpose machine builders and system integrators.</p>
+      <div class="footer-address">
+        <strong>ClusterVise BV</strong><br/>
+        Besloten Vennootschap · Belgium<br/>
+        Company no. 1.032.591.922<br/>
+        Charleroise Steenweg 110<br/>
+        1060 Sint-Gillis (bij-Brussel), Belgium
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="/#how-it-works">How it works</a>
+      <a href="/#features">Features</a>
+      <a href="/#results">Results</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#security">Security</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/glossary/">Glossary</a>
+    </div>
+    <div class="footer-col">
+      <h4>Solutions</h4>
+      <a href="/solutions/auto-bom/">Auto BOM</a>
+      <a href="/solutions/training-module/">Training Module</a>
+      <a href="/solutions/parts-component-library/">Parts &amp; Component Library</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="mailto:info@clustervise.com?subject=Request%20a%20demo">Request a demo</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/#security">Security</a>
+    </div>
   </div>
+  <div class="footer-bottom">
+    <span>© 2026 ClusterVise BV. All rights reserved. · Sint-Gillis (bij-Brussel), Belgium</span>
+    <span>Engineering intelligence for industrial automation teams</span>
     <div class="social-icons">
   <a href="https://www.linkedin.com/company/clustervise/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
   <a href="https://www.instagram.com/clustervise/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
   <a href="https://x.com/ClusterVise_off" target="_blank" rel="noopener" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
 </div>
-</div>
+  </div>
+</footer>
 
 <script>
 /* Reveal on scroll */
@@ -865,7 +986,9 @@ const cards = document.querySelectorAll('.card');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const searchInput = document.getElementById('search');
 const countEl = document.getElementById('count');
+const totalCountEl = document.getElementById('total-count');
 const noResults = document.getElementById('no-results');
+if (totalCountEl) totalCountEl.textContent = cards.length;
 
 let activeFilter = 'all';
 let searchQuery = '';
