@@ -198,6 +198,7 @@ html.cv-theme-transition *{
 }
 .cv-mnav-toggle{
   display:none;
+  flex-direction:column;
   align-items:center;justify-content:center;
   width:34px;height:34px;flex:0 0 auto;
   border-radius:999px;
